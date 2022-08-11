@@ -25,7 +25,8 @@
     "prestart": "npm run rebuild",
     "start": "node -r source-map-support/register .",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
-    "rebuild": "npm run clean && npm run build"
+    "rebuild": "npm run clean && npm run build",
+    "release": "heroku container:push --arg NPM_TOKEN=${NPM_TOKEN_SPRINSTUDIOCO} -a met-apprendo web && heroku container:release -a met-apprendo web"
   },
   "repository": {
     "type": "git",
