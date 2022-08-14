@@ -1,24 +1,39 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
+import {ApplicationConfig as DefaultConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
-import authMiddleware from './middleware/authentication.middleware'
+import authMiddleware from './middleware/authentication.middleware';
 
+type ApplicationConfig = DefaultConfig & {
+  basicAuthUsername?: string;
+  basicAuthPassword?: string;
+  basicAuthDisabled?: boolean;
+
+}
 export {ApplicationConfig};
+
+
 
 export class BlockchainRestApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
-  constructor(options: ApplicationConfig = {}) {
+  constructor(options: ApplicationConfig) {
+
     super(options);
 
-    this.middleware(authMiddleware);
+    const {
+      basicAuthUsername = process.env.BASIC_AUTH_USERNAME ?? '',
+      basicAuthPassword = process.env.BASIC_AUTH_PASSWORD ?? '',
+      basicAuthDisabled = process.env.DISABLE_AUTH === 'true'
+    } = options;
+
+    this.middleware(authMiddleware(basicAuthUsername, basicAuthPassword, basicAuthDisabled));
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
@@ -30,11 +45,15 @@ export class BlockchainRestApiApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
+    console.log('root: ', __dirname);
+    // var path = require('path');
+    console.log(process.cwd())
+    path.resolve(__dirname, 'app/server')
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here
-        dirs: ['controllers'],
+        dirs: ['../controllers', './controllers', '../../controllers', 'controllers'],
         extensions: ['.controller.js'],
         nested: true,
       },

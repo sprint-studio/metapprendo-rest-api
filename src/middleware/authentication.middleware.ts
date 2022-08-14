@@ -4,9 +4,8 @@ import {Middleware, MiddlewareContext} from '@loopback/rest';
 import auth from 'basic-auth';
 
 
-
-const authMiddleware: Middleware = async (middlewareCtx, next) => {
-    if(process.env.DISABLE_AUTH === 'true') {
+const authMiddleware = (username: string, password: string, disabled: boolean): Middleware =>  async (middlewareCtx, next) => {
+    if(disabled) {
       return next()
     }
 
@@ -24,8 +23,8 @@ const authMiddleware: Middleware = async (middlewareCtx, next) => {
       return sendChallenge(middlewareCtx.response)
     }
 
-    const credentialsAreCorrect = credentials.name === process.env.BASIC_AUTH_USERNAME
-      && credentials.pass === process.env.BASIC_AUTH_PASSWORD
+    const credentialsAreCorrect = credentials.name === username
+      && credentials.pass === password
 
     if(!credentialsAreCorrect) {
       return sendChallenge(middlewareCtx.response)
