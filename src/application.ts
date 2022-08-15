@@ -1,7 +1,7 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig as DefaultConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
+import {OASEnhancerBindings, RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
   RestExplorerComponent
@@ -50,10 +50,16 @@ export class BlockchainRestApiApplication extends BootMixin(
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here
-        dirs: ['../controllers', './controllers', '../../controllers', 'controllers'],
+        dirs: ['controllers'],
         extensions: ['.controller.js'],
         nested: true,
       },
     };
   }
+
+    // define a function to return a spec service by the same key
+    getSpecService() {
+      return this.get(OASEnhancerBindings.OAS_ENHANCER_SERVICE);
+    }
+
 }

@@ -1,11 +1,11 @@
 const { When, Then } = require('@cucumber/cucumber')
 
-When('the MetApprendo Admin user is requested', async function () {
+When('The MetApprendo Admin user is requested', async function () {
   const res = await this.client.get('/admin').expect(200);
   this.user = res.body;
 });
 
-When('the MetApprendo Admin user is created', async function () {
+When('The MetApprendo Admin user is created', async function () {
   const res = await this.client.post('/admin').expect(200);
   this.user = res.body;
 });

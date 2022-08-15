@@ -2,6 +2,7 @@ import {ApplicationConfig, BlockchainRestApiApplication} from './application';
 
 export * from './application';
 
+
 export async function main(options: ApplicationConfig = {}) {
   const app = new BlockchainRestApiApplication(options);
   await app.boot();
