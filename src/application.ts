@@ -45,9 +45,6 @@ export class BlockchainRestApiApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
-    console.log('root: ', __dirname);
-    // var path = require('path');
-    console.log(process.cwd())
     path.resolve(__dirname, 'app/server')
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {

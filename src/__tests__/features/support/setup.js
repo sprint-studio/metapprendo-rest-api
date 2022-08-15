@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-invalid-this */
 const { After, Before } = require('@cucumber/cucumber');
-const { setupApplication } = require('../../acceptance/test-helper');
+const { setupApplication } = require('../../test-helper');
 require('chai').should()
 
 Before(async function () {

@@ -1,29 +1,27 @@
 import {inject} from '@loopback/core';
 import {
-  get, post, Request, requestBody, response, RestBindings
+  get, post, Request, response, RestBindings
 } from '@loopback/rest';
-import {User} from '../models';
+import {AdminUser} from '../models';
 
 export class AdminController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
   @get('/admin')
-  @response(200, User)
-  getAdmin(): {} {
-    return new User({
+  @response(200, AdminUser)
+  getAdmin(): AdminUser {
+    return new AdminUser({
       idUtente: "123",
-      nomeCompleto: "MetApprendo Admin",
-      sesso: "M",
-      dataNascita: "01/01/1980",
-      username: "nomeCognome",
-      email: "nome.cognome@gmail.com",
+      nomeCompleto: "MetApprendo Admin"
     });
   }
 
   @post('/admin')
-  @response(200, {})
-  createAdmin(@requestBody() admin: {}): {} {
-    return {
-    };
+  @response(200, AdminUser)
+  createAdmin(): AdminUser {
+    return new AdminUser({
+      idUtente: "123",
+      nomeCompleto: "MetApprendo Admin"
+    });
   }
 }

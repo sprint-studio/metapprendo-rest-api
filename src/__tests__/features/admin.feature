@@ -1,5 +1,14 @@
 Feature: Admin
 
   Scenario: Get the Admin user MetApprendo
-    When the MetApprendo Admin user is requested
+    When The MetApprendo Admin user is requested
+    And I should receive the user with name "MetApprendo Admin"
+
+
+  Scenario: Çreate the Admin user MetApprendo
+    When The MetApprendo Admin user is created
     Then I should receive the user with name "MetApprendo Admin"
+
+  Scenario: Assign an user to be Admin of a Company group
+    When an existing user is assigned to be admin of an existing company group "test"
+    Then It becomes admin of the company group "test"
