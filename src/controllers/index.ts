@@ -2,4 +2,9 @@ export * from './companyEducationalAgendas.controller';
 export * from './educationalPaths.controller';
 export * from './ping.controller';
 export * from './trainingPaths.controller';
-
+export * from './educationalPills.controller';
+export * from './groups.controller';
+export * from './profiles.controller';
+export * from './users.controller';
+export * from './admin.controller';
+export * from './companies.controller';

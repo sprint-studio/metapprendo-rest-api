@@ -6,6 +6,10 @@ import auth from 'basic-auth';
 
 
 const authMiddleware: Middleware = async (middlewareCtx, next) => {
+    if(process.env.DISABLE_AUTH === 'true') {
+      return next()
+    }
+
     const {request} = middlewareCtx;
 
     const sendChallenge = (res: MiddlewareContext["response"]) => {
