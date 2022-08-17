@@ -42,6 +42,18 @@ export class CompaniesController {
     return {};
   }
 
+  @post("/companies/{companyId}", {
+    description: "Crea un nuovo gruppo aziendale",
+    responses: {
+      "200": {
+        description: "Il nuovo gruppo aziendale e' stato creato con successo.",
+      },
+    },
+  })
+  createNewCompanyGroup(@param.path.string("idAzienda") idAzienda: string): {} {
+    return {};
+  }
+
   @get("/companies/{companyId}/admin", {
     description: "Ritorna l'amministratore del gruppo aziendale",
     responses: {
@@ -54,7 +66,7 @@ export class CompaniesController {
     return {};
   }
 
-  @post("/api/companies/{idAzienda}/worker/{idUtente}", {
+  @post("/companies/{idAzienda}/worker/{idUtente}", {
     description: "Associa un lavoratore preesistente ad gruppo Aziendale",
     responses: {
       "200": {
@@ -70,7 +82,7 @@ export class CompaniesController {
     return {};
   }
 
-  @del("/api/companies/{idAzienda}/worker/{idUtente}", {
+  @del("/companies/{idAzienda}/worker/{idUtente}", {
     description: "Rimuovo un lavoratore preesistente da gruppo Aziendale",
     responses: {
       "200": {
