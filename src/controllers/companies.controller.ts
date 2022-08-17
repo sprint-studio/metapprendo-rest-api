@@ -4,6 +4,7 @@ import {
   param,
   post,
   get,
+  del,
   Request,
   requestBody,
   RestBindings,
@@ -58,11 +59,27 @@ export class CompaniesController {
     responses: {
       "200": {
         description:
-          "L'utente e' stato correttamente aggiunto al gruppo aziendale {idAzienda}",
+          "L'utente e' stato correttamente aggiunto al gruppo aziendale",
       },
     },
   })
   addWorkerToCompanyGroup(
+    @param.path.string("idAzienda") companayId: string,
+    @param.path.string("idUtente") idUtente: string
+  ): {} {
+    return {};
+  }
+
+  @del("/api/companies/{idAzienda}/worker/{idUtente}", {
+    description: "Rimuovo un lavoratore preesistente da gruppo Aziendale",
+    responses: {
+      "200": {
+        description:
+          "L'utente e' stato correttamente rimosso al gruppo aziendale",
+      },
+    },
+  })
+  deleteWorkerFromCompanyGroup(
     @param.path.string("idAzienda") companayId: string,
     @param.path.string("idUtente") idUtente: string
   ): {} {
