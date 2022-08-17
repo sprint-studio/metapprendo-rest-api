@@ -52,4 +52,20 @@ export class CompaniesController {
   getCompanyGroupAdmin(@param.path.string("companyId") companyId: string): {} {
     return {};
   }
+
+  @post("/api/companies/{idAzienda}/worker/{idUtente}", {
+    description: "Associa un lavoratore preesistente ad gruppo Aziendale",
+    responses: {
+      "200": {
+        description:
+          "L'utente e' stato correttamente aggiunto al gruppo aziendale {idAzienda}",
+      },
+    },
+  })
+  addWorkerToCompanyGroup(
+    @param.path.string("idAzienda") companayId: string,
+    @param.path.string("idUtente") idUtente: string
+  ): {} {
+    return {};
+  }
 }
