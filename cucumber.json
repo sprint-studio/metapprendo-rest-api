@@ -1,0 +1,7 @@
+{
+  "default": {
+    "paths": [
+      "./dist/__tests__"
+    ]
+  }
+}

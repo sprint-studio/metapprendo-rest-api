@@ -1,9 +1,8 @@
-import {BlockchainRestApiApplication} from '../..';
 import {
-  createRestAppClient,
-  givenHttpServerConfig,
-  Client,
+  Client, createRestAppClient,
+  givenHttpServerConfig
 } from '@loopback/testlab';
+import {BlockchainRestApiApplication} from '..';
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({
@@ -16,6 +15,7 @@ export async function setupApplication(): Promise<AppWithClient> {
 
   const app = new BlockchainRestApiApplication({
     rest: restConfig,
+    basicAuthDisabled: true,
   });
 
   await app.boot();

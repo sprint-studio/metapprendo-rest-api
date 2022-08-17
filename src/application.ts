@@ -1,24 +1,39 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig as DefaultConfig} from '@loopback/core';
+import {RepositoryMixin} from '@loopback/repository';
+import {OASEnhancerBindings, RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent,
+  RestExplorerComponent
 } from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
-import authMiddleware from './middleware/authentication.middleware'
+import authMiddleware from './middleware/authentication.middleware';
 
+type ApplicationConfig = DefaultConfig & {
+  basicAuthUsername?: string;
+  basicAuthPassword?: string;
+  basicAuthDisabled?: boolean;
+
+}
 export {ApplicationConfig};
+
+
 
 export class BlockchainRestApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
-  constructor(options: ApplicationConfig = {}) {
+  constructor(options: ApplicationConfig) {
+
     super(options);
 
-    this.middleware(authMiddleware);
+    const {
+      basicAuthUsername = process.env.BASIC_AUTH_USERNAME ?? '',
+      basicAuthPassword = process.env.BASIC_AUTH_PASSWORD ?? '',
+      basicAuthDisabled = process.env.DISABLE_AUTH === 'true'
+    } = options;
+
+    this.middleware(authMiddleware(basicAuthUsername, basicAuthPassword, basicAuthDisabled));
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
@@ -30,6 +45,7 @@ export class BlockchainRestApiApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
+    path.resolve(__dirname, 'app/server')
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
       controllers: {
@@ -40,4 +56,10 @@ export class BlockchainRestApiApplication extends BootMixin(
       },
     };
   }
+
+    // define a function to return a spec service by the same key
+    getSpecService() {
+      return this.get(OASEnhancerBindings.OAS_ENHANCER_SERVICE);
+    }
+
 }
