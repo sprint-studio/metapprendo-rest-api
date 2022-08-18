@@ -42,11 +42,11 @@ Feature: Companies
     
     Scenario: Associate a worker to a provied company group without specifing the company group
         When The company group admin send a request without passing idAzienda
-        And The system respond with an error message telling that idAzienda must be provided as parameter
+        And The system return an error message telling that idAzienda is mandatory
     
     Scenario: Associate a worker to a provided company group without specifing the idUtente
         When The company group admin send a request without passing idUtente
-        And The system respond with an error message telling that idUtente must be provided as parameter
+        And The system return an error message telling that idUtente is mandatory
 
 
     # Scenario about dissociate a worker from a provided company group
