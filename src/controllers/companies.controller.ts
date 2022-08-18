@@ -10,6 +10,8 @@ import {
   RestBindings,
 } from "@loopback/rest";
 
+import { BlockchainTransaction, User } from "../models";
+
 @model()
 class CreateNewCompanyGroupAdminBody {
   @property({
@@ -18,6 +20,34 @@ class CreateNewCompanyGroupAdminBody {
   })
   idUtente: string;
 }
+
+@model()
+class CreateNewCompanyGroupBody {
+  @property({
+    type: "string",
+    required: true,
+  })
+  ragioneSociale: string;
+
+  @property({
+    type: "string",
+    required: true,
+  })
+  CUA: string;
+
+  @property({
+    type: "string",
+    required: true,
+  })
+  PIVA: string;
+
+  @property({
+    type: "string",
+    required: true,
+  })
+  CF: string;
+}
+
 export class CompaniesController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
@@ -50,8 +80,18 @@ export class CompaniesController {
       },
     },
   })
-  createNewCompanyGroup(@param.path.string("idAzienda") idAzienda: string): {} {
-    return {};
+  createNewCompanyGroup(
+    @param.path.string("idAzienda") idAzienda: string,
+    @requestBody({
+      description: "I dettagli del nuovo gruppo da creare",
+      required: true,
+    })
+    companyDetails: CreateNewCompanyGroupBody
+  ): BlockchainTransaction {
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+    });
   }
 
   @get("/companies/{companyId}/admin", {
@@ -62,8 +102,12 @@ export class CompaniesController {
       },
     },
   })
-  getCompanyGroupAdmin(@param.path.string("companyId") companyId: string): {} {
-    return {};
+  getCompanyGroupAdmin(
+    @param.path.string("companyId") companyId: string
+  ): User {
+    return new User({
+      nomeCompleto: "Foobarz",
+    });
   }
 
   @post("/companies/{idAzienda}/worker/{idUtente}", {
@@ -78,8 +122,11 @@ export class CompaniesController {
   addWorkerToCompanyGroup(
     @param.path.string("idAzienda") companayId: string,
     @param.path.string("idUtente") idUtente: string
-  ): {} {
-    return {};
+  ): BlockchainTransaction {
+    return new BlockchainTransaction({
+      idTrx: "124w2er2er23",
+      dataOraTrx: new Date(),
+    });
   }
 
   @del("/companies/{idAzienda}/worker/{idUtente}", {
