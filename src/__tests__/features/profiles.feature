@@ -2,7 +2,7 @@ Feature: Profiles
     
     Scenario: Create a new Profile
         When The MetApprendo Admin send a request with all necessary informations
-        Then The system create a new profile making new transaction on the Blockchain and the transaction informations
+        Then The system create a new profile making new transaction on the Blockchain and return the transaction informations
     
     Scenario: Try to create a Profile without idProfilo
         When The MetApprendo Admin send a request without idProfilo property into the body
