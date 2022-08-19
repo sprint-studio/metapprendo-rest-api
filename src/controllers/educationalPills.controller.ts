@@ -1,10 +1,10 @@
 import { inject } from "@loopback/core";
 import { property } from "@loopback/repository";
 import {
+  getModelSchemaRef,
   post,
   Request,
   requestBody,
-  response,
   RestBindings,
 } from "@loopback/rest";
 
@@ -21,8 +21,22 @@ class CreateEducationalPillBody {
 export class EducationalPillsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post("/educational_pills")
-  @response(200, {})
+  @post("/educational_pills", {
+    description: "Endpoint per creare una nuova pilla formativa",
+    responses: {
+      "200": {
+        description:
+          "Transazione di conferma avvenuta creazione della nuova pillola formativa",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
   createEducationalPill(
     @requestBody({
       description: "I dettagli della pillola da dover creare",

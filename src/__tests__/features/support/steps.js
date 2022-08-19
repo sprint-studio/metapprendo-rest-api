@@ -147,3 +147,29 @@ When(
 Then("The System respond with an error telling that stato is mandatory", () => {
   // TODO to implement
 });
+
+// Educational Pills steps
+When(
+  "The MetApprendo admin send a request with all necessary informations to create an Educational Pills",
+  () => {
+    // TODO to implement
+  }
+);
+
+Then(
+  "The system create a new Educational Pills making new transaction on the Blockchain and return the informations",
+  () => {
+    // TODO to implement
+  }
+);
+
+When("The MetApprendo admin send a request without idPillola", () => {
+  // TODO to implement
+});
+
+Then(
+  "The System respond with an error telling that idPillola is mandatory",
+  () => {
+    // TODO to implement
+  }
+);
