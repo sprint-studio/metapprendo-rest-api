@@ -82,7 +82,68 @@ When(
   }
 );
 
-Then(
-  "The System respond with an error telling that stato is mandatory",
-  () => {}
+Then("The System respond with an error telling that stato is mandatory", () => {
+  // TODO to implement
+});
+
+// Company Group steps
+When(
+  "The MetApprendo admin send a request with all necessary informations to create a Company Group",
+  () => {
+    // TODO to implement
+  }
 );
+
+Then(
+  "The system create a new Company Group making new transaction on the Blockchain and return the informations",
+  () => {
+    // TODO to implement
+  }
+);
+
+When("The MetApprendo admin send a request without idGruppo", () => {
+  // TODO to implement
+});
+
+Then(
+  "The System respond with an error telling that idGruppo is mandatory",
+  () => {
+    // TODO to implement
+  }
+);
+
+When(
+  "The MetApprendo Admin send a request without nome property into the body",
+  () => {
+    // TODO to implement
+  }
+);
+
+Then("The System respond with an error telling that nome is mandatory", () => {
+  // TODO to implement
+});
+
+When(
+  "The MetApprendo Admin send a request without descrizione property into the body",
+  () => {
+    // TODO to implement
+  }
+);
+
+Then(
+  "The System respond with an error telling that descrizione is mandatory",
+  () => {
+    // TODO to implement
+  }
+);
+
+When(
+  "The MetApprendo Admin send a request without stato property into the body",
+  () => {
+    // TODO to implement
+  }
+);
+
+Then("The System respond with an error telling that stato is mandatory", () => {
+  // TODO to implement
+});

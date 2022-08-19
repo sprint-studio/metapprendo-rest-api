@@ -1,6 +1,7 @@
 import { inject } from "@loopback/core";
 import { property } from "@loopback/repository";
 import {
+  getModelSchemaRef,
   post,
   Request,
   requestBody,
@@ -39,8 +40,22 @@ class CreateGroupBody {
 export class GroupsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post("/groups")
-  @response(200, {})
+  @post("/groups", {
+    description: "Endpoint per la creazione di un nuovo gruppo aziendale",
+    responses: {
+      "200": {
+        description:
+          "Transazione di conferma avvenuta creazione del gruppo aziendale",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
   createGroup(
     @requestBody({
       description: "Dettagli per la creazione di un nuovo gruppo",
