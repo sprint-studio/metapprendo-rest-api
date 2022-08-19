@@ -8,9 +8,9 @@ Feature: Educational Pills
         When The MetApprendo admin send a request without idPillola
         Then The System respond with an error telling that idPillola is mandatory
 
-    Scenario: Try to create a Educational Pills without nome
-        When The MetApprendo Admin send a request without nome property into the body
-        Then The System respond with an error telling that nome is mandatory
+    Scenario: Try to create a Educational Pills without titolo
+        When The MetApprendo Admin send a request without titolo property into the body
+        Then The System respond with an error telling that titolo is mandatory
     
     Scenario: Try to create a Educational Pills without descrizione
         When The MetApprendo Admin send a request without descrizione property into the body

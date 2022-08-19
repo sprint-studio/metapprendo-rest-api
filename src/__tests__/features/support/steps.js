@@ -173,3 +173,14 @@ Then(
     // TODO to implement
   }
 );
+
+When("The MetApprendo admin send a request without titolo", () => {
+  // TODO to implement
+});
+
+Then(
+  "The System respond with an error telling that titolo is mandatory",
+  () => {
+    // TODO to implement
+  }
+);
