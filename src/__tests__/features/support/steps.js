@@ -29,12 +29,7 @@ Then("I should receive the user with name {string}", function (expectedName) {
 // Feature Profiles steps
 When(
   "The MetApprendo Admin send a request with all necessary informations",
-  () => {}
-);
-// Scenarios aboutCreate new company group scenarios
-When(
-  "The MetApprendo Admin send a request with all mandatory data to create a new Company group",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -46,12 +41,7 @@ Then(
 
 When(
   "The MetApprendo Admin send a request without idProfilo property into the body",
-  () => {}
-);
-
-Then(
-  "The System create a transaction into the Blockchain and a send a successful response",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -63,16 +53,7 @@ Then(
 
 When(
   "The MetApprendo Admin send a request without nome property into the body",
-  () => {}
-);
-
-When("The MetApprendo admin send a request without any data", async () => {
-  // TODO to implement
-});
-
-Then(
-  "The System respond with a error messages telling to pass mandatory data",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -84,12 +65,7 @@ Then(
 
 When(
   "The MetApprendo Admin send a request without descrizione property into the body",
-  () => {}
-);
-
-When(
-  "The MetApprendo admin send a request without ragioneSociale",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -101,12 +77,7 @@ Then(
 
 When(
   "The MetApprendo Admin send a request without stato property into the body",
-  () => {}
-);
-
-Then(
-  "The System respond with a error messages telling that ragioneSociale is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -125,50 +96,25 @@ When(
 
 Then(
   "The system create a new Company Group making new transaction on the Blockchain and return the informations",
-  () => {}
-);
-
-When("The MetApprendo admin send a request without CUA", async () => {
-  // TODO to implement
-});
-
-Then(
-  "The System respond with a error messages telling that CUA is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
 
-When("The MetApprendo admin send a request without idGruppo", () => {});
-
-When("The MetApprendo admin send a request without PIVA", async () => {
+When("The MetApprendo admin send a request without idGruppo", () => {
   // TODO to implement
 });
 
 Then(
   "The System respond with an error telling that idGruppo is mandatory",
-  () => {}
-);
-
-Then(
-  "The System respond with a error messages telling that PIVA is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
 
 When(
   "The MetApprendo Admin send a request without nome property into the body",
-  () => {}
-);
-
-When("The MetApprendo admin send a request without CF", async () => {
-  // TODO to implement
-});
-
-Then(
-  "The System respond with a error messages telling that CF is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -179,36 +125,21 @@ Then("The System respond with an error telling that nome is mandatory", () => {
 
 When(
   "The MetApprendo Admin send a request without descrizione property into the body",
-  () => {}
-);
-
-When(
-  "The company group admin send a request passing idAzienda and idUtente",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
 
 Then(
   "The System respond with an error telling that descrizione is mandatory",
-  () => {}
-);
-
-Then(
-  "The system add the user associated to idUtente to the provided company group associated to idAzienda creating a Blockchain transaction and returning it",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
 
 When(
   "The MetApprendo Admin send a request without stato property into the body",
-  () => {}
-);
-
-Then(
-  "The company group admin send a request without passing idAzienda",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -220,24 +151,14 @@ Then("The System respond with an error telling that stato is mandatory", () => {
 // Educational Pills steps
 When(
   "The MetApprendo admin send a request with all necessary informations to create an Educational Pills",
-  () => {}
-);
-
-Then(
-  "The system return an error message telling that idAzienda is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
 
 Then(
   "The system create a new Educational Pills making new transaction on the Blockchain and return the informations",
-  () => {}
-);
-
-When(
-  "The company group admin send a request without passing idUtente",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -248,12 +169,7 @@ When("The MetApprendo admin send a request without idPillola", () => {
 
 Then(
   "The System respond with an error telling that idPillola is mandatory",
-  () => {}
-);
-
-Then(
-  "The system return an error message telling that idUtente is mandatory",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
@@ -264,12 +180,7 @@ When("The MetApprendo admin send a request without titolo", () => {
 
 Then(
   "The System respond with an error telling that titolo is mandatory",
-  () => {}
-);
-
-Then(
-  "The system make a Blockchain transaction to record that the user is dissociated from the company group",
-  async () => {
+  () => {
     // TODO to implement
   }
 );
