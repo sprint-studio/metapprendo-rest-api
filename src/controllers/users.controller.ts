@@ -3,8 +3,14 @@ import {del, param, post, Request, requestBody, response, RestBindings} from '@l
 
 export class UsersController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
-
-  @del('/users/{userId}')
+  @del('/users/{userId}', {
+    description: "Disabilita un utente dall'utilizzo del sistema",
+    responses: {
+      "200": {
+        description: "Utente disabilitato con successo",
+      },
+    },
+  })
   @response(200)
   deactivateUser(@param.path.string('userId') userId: string) {
 
