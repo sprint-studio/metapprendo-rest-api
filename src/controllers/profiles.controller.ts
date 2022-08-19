@@ -40,7 +40,7 @@ export class ProfilesController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
   @post("/profiles", {
-    description: "",
+    description: "Endpoint per la creazione di un nuovo profilo",
     responses: {
       "200": {
         description: "Transazione di conferma avvenuta creazione del profilo",
