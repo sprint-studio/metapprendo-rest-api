@@ -1,6 +1,7 @@
 import { inject } from "@loopback/core";
 import { property } from "@loopback/repository";
 import {
+  getModelSchemaRef,
   post,
   Request,
   requestBody,
@@ -38,8 +39,21 @@ class CreateProfileBody {
 export class ProfilesController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post("/profiles")
-  @response(200, {})
+  @post("/profiles", {
+    description: "",
+    responses: {
+      "200": {
+        description: "Transazione di conferma avvenuta creazione del profilo",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
   createProfile(
     @requestBody({
       description: "Dettagli per la creazione del nuovo profile ",
