@@ -1,16 +1,13 @@
-import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
+import {inject} from "@loopback/core";
+import {model, property} from "@loopback/repository";
 import {
-  param,
-  post,
-  get,
-  del,
-  Request,
+  del, get, getModelSchemaRef, param,
+  post, Request,
   requestBody,
-  RestBindings,
+  RestBindings
 } from "@loopback/rest";
+import {BlockchainTransaction, User} from "../models";
 
-import { BlockchainTransaction, User } from "../models";
 
 @model()
 class CreateNewCompanyGroupAdminBody {
@@ -58,6 +55,13 @@ export class CompaniesController {
       "200": {
         description:
           "Utente promosso ad Admin del gruppo aziendale con successo",
+        content: {
+          'application/json': {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true
+            })
+          },
+        },
       },
     },
   })
@@ -69,7 +73,10 @@ export class CompaniesController {
     })
     userId: CreateNewCompanyGroupAdminBody
   ): {} {
-    return {};
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+    });
   }
 
   @post("/companies/{companyId}", {
@@ -77,6 +84,13 @@ export class CompaniesController {
     responses: {
       "200": {
         description: "Il nuovo gruppo aziendale e' stato creato con successo.",
+        content: {
+          'application/json': {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true
+            })
+          },
+        },
       },
     },
   })
@@ -116,6 +130,13 @@ export class CompaniesController {
       "200": {
         description:
           "L'utente e' stato correttamente aggiunto al gruppo aziendale",
+        content: {
+          'application/json': {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true
+            })
+          },
+        },
       },
     },
   })
@@ -135,6 +156,13 @@ export class CompaniesController {
       "200": {
         description:
           "L'utente e' stato correttamente rimosso al gruppo aziendale",
+          content: {
+            'application/json': {
+              schema: getModelSchemaRef(BlockchainTransaction, {
+                includeRelations: true
+              })
+            },
+          },
       },
     },
   })
@@ -142,6 +170,9 @@ export class CompaniesController {
     @param.path.string("idAzienda") companayId: string,
     @param.path.string("idUtente") idUtente: string
   ): {} {
-    return {};
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+    });;
   }
 }
