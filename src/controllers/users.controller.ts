@@ -1,8 +1,17 @@
-import {inject} from '@loopback/core';
-import {model, property} from '@loopback/repository';
-import {del, getModelSchemaRef, param, post, Request, requestBody, response, RestBindings} from '@loopback/rest';
-import {User} from '../models';
-import {BlockchainTransaction} from '../models/blockchainTransaction.model';
+import { inject } from "@loopback/core";
+import { model, property } from "@loopback/repository";
+import {
+  del,
+  getModelSchemaRef,
+  param,
+  post,
+  Request,
+  requestBody,
+  response,
+  RestBindings,
+} from "@loopback/rest";
+import { User } from "../models";
+import { BlockchainTransaction } from "../models/blockchainTransaction.model";
 
 @model()
 class UpdateUserDossier {
@@ -12,76 +21,83 @@ class UpdateUserDossier {
   })
   IdTask: string;
 }
+
 export class UsersController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
-  @del('/users/{userId}', {
+
+  @del("/users/{userId}", {
     description: "Disabilita un utente dall'utilizzo del sistema",
     responses: {
       "200": {
         description: "Utente disabilitato con successo",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
     },
   })
-  @response(200)
-  deactivateUser(@param.path.string('userId') userId: string) {
+  deactivateUser(@param.path.string("userId") userId: string) {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
     });
   }
 
-  @post('/users')
-  @response(200, {
-    description: "Crea un nuovo utente per utilizzo del sistema blockchain",
+  @post("/users", {
+    description: "Crea un nuovo utente per l'utilizzo del sistema blockchain",
     responses: {
       "200": {
         description: "Utente creato con successo",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
     },
   })
-  createUser(@requestBody() user: User): {} {
+  createUser(
+    @requestBody({
+      description: "I dettagli dell'utente da creare",
+      required: true,
+    })
+    user: User
+  ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
     });
   }
 
-  @post('/users/{userId}/dossier/education')
-  @response(200, {
-    description: "",
+  @post("/users/{userId}/dossier/education", {
+    description:
+      "Aggiorna il dossier formativo dell'utente per inserire una nuova pillola formativa",
     responses: {
       "200": {
-        description: "Aggiorna il dossier formativo dell'utente per inserire una nuova pillola formativa",
+        description: "Dossier formativo aggiornato con successo",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
     },
   })
   updateUserDossier(
-    @param.path.string('userId') userId: string,
-    @requestBody() dossierUpdate: UpdateUserDossier): {} {
-      return new BlockchainTransaction({
-        idTrx: "33242rdfwfwer234rr2342",
-        dataOraTrx: new Date("2022-08-17"),
-      });
+    @param.path.string("userId") userId: string,
+    @requestBody() dossierUpdate: UpdateUserDossier
+  ): {} {
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+    });
   }
 }

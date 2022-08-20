@@ -1,5 +1,5 @@
 import { inject } from "@loopback/core";
-import { property } from "@loopback/repository";
+import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
@@ -10,6 +10,7 @@ import {
 
 import { BlockchainTransaction } from "../models";
 
+@model()
 class CreateEducationalPillBody {
   @property({
     type: "string",
@@ -43,7 +44,7 @@ export class EducationalPillsController {
       required: true,
     })
     educationalPill: CreateEducationalPillBody
-  ): object {
+  ): BlockchainTransaction {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
       dataOraTrx: new Date(),

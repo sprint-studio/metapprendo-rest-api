@@ -1,6 +1,7 @@
 import { inject } from "@loopback/core";
 import { property } from "@loopback/repository";
 import {
+  getModelSchemaRef,
   post,
   Request,
   requestBody,
@@ -39,8 +40,21 @@ class CreateEducationalPathBody {
 export class EducationalPathsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post("/educational_paths")
-  @response(200)
+  @post("/educational_paths", {
+    description: "Crea un nuovo percorso formativo",
+    responses: {
+      "200": {
+        description: "Il percorso formativo e' stato creato correttamente",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
   createEducationalPath(
     @requestBody({
       description:
