@@ -1,10 +1,16 @@
-import {inject} from '@loopback/core';
-import {model, property} from '@loopback/repository';
-import {getModelSchemaRef, post, Request, requestBody, response, RestBindings} from '@loopback/rest';
-import {BlockchainTransaction} from '../models';
+import { inject } from "@loopback/core";
+import { property } from "@loopback/repository";
+import {
+  post,
+  Request,
+  requestBody,
+  response,
+  RestBindings,
+} from "@loopback/rest";
 
-@model()
-class CreateNewCompanyEducationalAgendaBody {
+import { BlockchainTransaction } from "../models";
+
+class CreateCompanyEducationalAgendaBody {
   @property({
     type: "string",
     required: true,
@@ -15,40 +21,35 @@ class CreateNewCompanyEducationalAgendaBody {
     type: "string",
     required: true,
   })
-  obbligatorieta: string;
+  idPillola: string;
 
   @property({
     type: "string",
     required: true,
   })
-  periodicita: string;
-}
+  idLavoratore: string;
 
+  @property({
+    type: "string",
+    required: true,
+  })
+  stato: string;
+}
 export class CompanyEducationalAgendasController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post('/company_educational_agendas', {
-    description:
-      "Crea una nuova agenda formativa per l'azienda",
-    responses: {
-      "200": {
-        description:
-          "Agenda formativa creata con successo",
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
-          },
-        },
-      },
-    },
-  })
+  @post("/company_educational_agendas")
   @response(200)
-  createCompanyEducationalAgenda(@requestBody() companyEducationalAgenda: CreateNewCompanyEducationalAgendaBody): BlockchainTransaction {
+  createCompanyEducationalAgenda(
+    @requestBody({
+      description: "Dettagli per creare un'agenda formativa aziendale",
+      required: true,
+    })
+    companyEducationalAgenda: CreateCompanyEducationalAgendaBody
+  ): {} {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      idTrx: "33423422342dsdfew",
+      dataOraTrx: new Date(),
     });
   }
 }

@@ -1,11 +1,16 @@
-import {inject} from '@loopback/core';
-import {model, property} from '@loopback/repository';
-import {getModelSchemaRef, post, Request, requestBody, response, RestBindings} from '@loopback/rest';
-import {BlockchainTransaction} from '../models';
+import { inject } from "@loopback/core";
+import { property } from "@loopback/repository";
+import {
+  post,
+  Request,
+  requestBody,
+  response,
+  RestBindings,
+} from "@loopback/rest";
 
+import { BlockchainTransaction } from "../models";
 
-@model()
-class CreateNewEducationalPathBody {
+class CreateEducationalPathBody {
   @property({
     type: "string",
     required: true,
@@ -22,34 +27,31 @@ class CreateNewEducationalPathBody {
     type: "string",
     required: true,
   })
-  formazione: string;
+  descrizione: string;
+
+  @property({
+    type: "string",
+    required: true,
+  })
+  idGruppoAziendale: string;
 }
 
 export class EducationalPathsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post('/educational_paths', {
-    description:
-      "Crea una nuova agenda formativa per l'azienda",
-    responses: {
-      "200": {
-        description:
-          "Agenda formativa creata con successo",
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
-          },
-        },
-      },
-    },
-  })
+  @post("/educational_paths")
   @response(200)
-  createEducationalPath(@requestBody() educationalPath: CreateNewEducationalPathBody): {} {
+  createEducationalPath(
+    @requestBody({
+      description:
+        "Dettagli del percorso formativo che l'admin del gruppo aziendale vuole creare",
+      required: true,
+    })
+    educationalPath: CreateEducationalPathBody
+  ): {} {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      idTrx: "33423422342dsdfew",
+      dataOraTrx: new Date(),
     });
   }
 }

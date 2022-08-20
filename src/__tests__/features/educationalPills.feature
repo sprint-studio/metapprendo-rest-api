@@ -1,13 +1,21 @@
-Feature: CompanyEducationalPills
+Feature: Educational Pills
 
-  Scenario: Create new company educational pill
-    When The MetApprendo admin send a request to create a company educational pill
-    Then The system send a successful confirmation
+    Scenario: Create new Educational Pills
+        When The MetApprendo admin send a request with all necessary informations to create an Educational Pills 
+        Then The system create a new Educational Pills making new transaction on the Blockchain and return the informations
+    
+    Scenario: Try to create new Educational Pills without idPillola
+        When The MetApprendo admin send a request without idPillola
+        Then The System respond with an error telling that idPillola is mandatory
 
-  Scenario: Try to create new company educational pill with missing value idPillola
-    When The MetApprendo admin send a request to create a company educational pill without idPillola
-    And The system return an error about the missing parameter
-
-  Scenario: Try to create new company educational pill with missing value titolo
-    When The MetApprendo admin send a request to create a company educational pill without titolo
-    And The system return an error about the missing parameter
+    Scenario: Try to create a Educational Pills without titolo
+        When The MetApprendo Admin send a request without titolo property into the body
+        Then The System respond with an error telling that titolo is mandatory
+    
+    Scenario: Try to create a Educational Pills without descrizione
+        When The MetApprendo Admin send a request without descrizione property into the body
+        Then The System respond with an error telling that descrizione is mandatory
+    
+    Scenario: Try to create a Educational Pills without stato
+        When The MetApprendo Admin send a request without stato property into the body
+        Then The System respond with an error telling that stato is mandatory

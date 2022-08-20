@@ -1,49 +1,52 @@
-import {inject} from '@loopback/core';
-import {property} from '@loopback/repository';
+import { inject } from "@loopback/core";
+import { property } from "@loopback/repository";
 import {
   getModelSchemaRef,
-  post, Request, requestBody, response, RestBindings
-} from '@loopback/rest';
-import {BlockchainTransaction} from '../models';
+  post,
+  Request,
+  requestBody,
+  RestBindings,
+} from "@loopback/rest";
 
-class CreateNewEducationalPillBody {
+import { BlockchainTransaction } from "../models";
+
+class CreateEducationalPillBody {
   @property({
     type: "string",
     required: true,
   })
   idPillola: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  titolo: string;
 }
+
 export class EducationalPillsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post('/educational_pills')
-  @response(200, {
-    description:
-      "Crea una nuova pillola formativa",
+  @post("/educational_pills", {
+    description: "Endpoint per creare una nuova pilla formativa",
     responses: {
       "200": {
         description:
-          "Pillola formativa creata con successo",
+          "Transazione di conferma avvenuta creazione della nuova pillola formativa",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
     },
   })
-  createEducationalPill(@requestBody() pill: CreateNewEducationalPillBody): BlockchainTransaction {
+  createEducationalPill(
+    @requestBody({
+      description: "I dettagli della pillola da dover creare",
+      required: true,
+    })
+    educationalPill: CreateEducationalPillBody
+  ): object {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
-    });;
+      idTrx: "33423422342dsdfew",
+      dataOraTrx: new Date(),
+    });
   }
 }
