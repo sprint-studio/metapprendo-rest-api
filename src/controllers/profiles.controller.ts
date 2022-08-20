@@ -1,16 +1,16 @@
 import { inject } from "@loopback/core";
-import { property } from "@loopback/repository";
+import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
   Request,
   requestBody,
-  response,
   RestBindings,
 } from "@loopback/rest";
 
 import { BlockchainTransaction } from "../models";
 
+@model()
 class CreateProfileBody {
   @property({
     type: "string",
@@ -56,11 +56,11 @@ export class ProfilesController {
   })
   createProfile(
     @requestBody({
-      description: "Dettagli per la creazione del nuovo profile ",
+      description: "Dettagli per la creazione del nuovo profilo",
       required: true,
     })
     profile: CreateProfileBody
-  ): object {
+  ): BlockchainTransaction {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
       dataOraTrx: new Date(),

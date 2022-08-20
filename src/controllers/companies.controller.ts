@@ -1,13 +1,16 @@
-import {inject} from "@loopback/core";
-import {model, property} from "@loopback/repository";
+import { inject } from "@loopback/core";
+import { model, property } from "@loopback/repository";
 import {
-  del, get, getModelSchemaRef, param,
-  post, Request,
+  del,
+  get,
+  getModelSchemaRef,
+  param,
+  post,
+  Request,
   requestBody,
-  RestBindings
+  RestBindings,
 } from "@loopback/rest";
-import {BlockchainTransaction, User} from "../models";
-
+import { BlockchainTransaction, User } from "../models";
 
 @model()
 class CreateNewCompanyGroupAdminBody {
@@ -56,10 +59,10 @@ export class CompaniesController {
         description:
           "Utente promosso ad Admin del gruppo aziendale con successo",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
@@ -68,7 +71,7 @@ export class CompaniesController {
   createNewCompanyGroupAdmin(
     @param.path.string("companyId") companyId: string,
     @requestBody({
-      description: "a modified user",
+      description: "L'id utente da dover autorizzare come admin",
       required: true,
     })
     userId: CreateNewCompanyGroupAdminBody
@@ -85,10 +88,10 @@ export class CompaniesController {
       "200": {
         description: "Il nuovo gruppo aziendale e' stato creato con successo.",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
@@ -112,7 +115,14 @@ export class CompaniesController {
     description: "Ritorna l'amministratore del gruppo aziendale",
     responses: {
       "200": {
-        description: "Admin del gruppo aziendale",
+        description: "L'admin del gruppo aziendale",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(User, {
+              includeRelations: true,
+            }),
+          },
+        },
       },
     },
   })
@@ -120,21 +130,21 @@ export class CompaniesController {
     @param.path.string("companyId") companyId: string
   ): User {
     return new User({
-      nomeCompleto: "Foobarz",
+      nomeCompleto: "User",
     });
   }
 
   @post("/companies/{idAzienda}/worker/{idUtente}", {
-    description: "Associa un lavoratore preesistente ad gruppo Aziendale",
+    description: "Associa un lavoratore preesistente ad un gruppo Aziendale",
     responses: {
       "200": {
         description:
           "L'utente e' stato correttamente aggiunto al gruppo aziendale",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
@@ -151,18 +161,18 @@ export class CompaniesController {
   }
 
   @del("/companies/{idAzienda}/worker/{idUtente}", {
-    description: "Rimuovo un lavoratore preesistente da gruppo Aziendale",
+    description: "Rimuovere un lavoratore preesistente da un gruppo Aziendale",
     responses: {
       "200": {
         description:
-          "L'utente e' stato correttamente rimosso al gruppo aziendale",
-          content: {
-            'application/json': {
-              schema: getModelSchemaRef(BlockchainTransaction, {
-                includeRelations: true
-              })
-            },
+          "L'utente e' stato correttamente rimosso dal gruppo aziendale",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
           },
+        },
       },
     },
   })
@@ -173,6 +183,6 @@ export class CompaniesController {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
-    });;
+    });
   }
 }

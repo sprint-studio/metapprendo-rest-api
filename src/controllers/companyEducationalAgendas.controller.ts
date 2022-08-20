@@ -1,6 +1,7 @@
 import { inject } from "@loopback/core";
 import { property } from "@loopback/repository";
 import {
+  getModelSchemaRef,
   post,
   Request,
   requestBody,
@@ -38,8 +39,21 @@ class CreateCompanyEducationalAgendaBody {
 export class CompanyEducationalAgendasController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @post("/company_educational_agendas")
-  @response(200)
+  @post("/company_educational_agendas", {
+    description: "Crea un'agenda formativa aziendale",
+    responses: {
+      "200": {
+        description: "L'agenda formativa e' stata creata correttamente",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
   createCompanyEducationalAgenda(
     @requestBody({
       description: "Dettagli per creare un'agenda formativa aziendale",
