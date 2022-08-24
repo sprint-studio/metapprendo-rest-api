@@ -1,16 +1,16 @@
 import { inject } from "@loopback/core";
-import { property } from "@loopback/repository";
+import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
   Request,
   requestBody,
-  response,
   RestBindings,
 } from "@loopback/rest";
 
 import { BlockchainTransaction } from "../models";
 
+@model()
 class CreateEducationalPathBody {
   @property({
     type: "string",

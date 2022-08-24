@@ -1,16 +1,16 @@
 import { inject } from "@loopback/core";
-import { property } from "@loopback/repository";
+import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
   Request,
   requestBody,
-  response,
   RestBindings,
 } from "@loopback/rest";
 
 import { BlockchainTransaction } from "../models";
 
+@model()
 class CreateCompanyEducationalAgendaBody {
   @property({
     type: "string",
@@ -36,6 +36,7 @@ class CreateCompanyEducationalAgendaBody {
   })
   stato: string;
 }
+
 export class CompanyEducationalAgendasController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
