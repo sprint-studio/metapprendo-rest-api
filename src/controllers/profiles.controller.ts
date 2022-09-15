@@ -29,13 +29,8 @@ class CreateProfileBody {
     required: true,
   })
   descrizione: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  stato: string;
 }
+
 export class ProfilesController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 

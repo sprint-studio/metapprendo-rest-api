@@ -75,18 +75,6 @@ Then(
   () => {}
 );
 
-When(
-  "The MetApprendo Admin send a request without stato property into the body",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then("The System respond with an error telling that stato is mandatory", () => {
-  // TODO to implement
-});
-
-
 // Educational Pills steps
 When(
   "The MetApprendo admin send a request with all necessary informations to create an Educational Pills",

@@ -29,12 +29,6 @@ class CreateCompanyEducationalAgendaBody {
     required: true,
   })
   idLavoratore: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  stato: string;
 }
 
 export class CompanyEducationalAgendasController {
