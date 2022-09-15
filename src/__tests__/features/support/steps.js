@@ -185,16 +185,18 @@ Then(
   }
 );
 
-
-When("The MetApprendo admin send a request to disable a specific user", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to disable a specific user",
+  async () => {
+    // TODO to implement
+  }
+);
 
 When("The MetApprendo admin send a request to create an user", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without idUtente", async () => {
+When("The MetApprendo admin send a request without userId", async () => {
   // TODO to implement
 });
 
@@ -210,14 +212,16 @@ When("The MetApprendo admin send a request without username", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without email", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to update an user dossier",
+  async () => {
+    // TODO to implement
+  }
+);
 
-When("The MetApprendo admin send a request to update an user dossier", async () => {
-  // TODO to implement
-});
-
-When("The MetApprendo admin send a request to update an user dossier without idTask", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to update an user dossier without idTask",
+  async () => {
+    // TODO to implement
+  }
+);

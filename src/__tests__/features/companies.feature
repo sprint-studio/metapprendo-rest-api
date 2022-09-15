@@ -37,28 +37,28 @@ Feature: Companies
     
     # Scenarios about Associate a worker to a provided company group
     Scenario: Associate a worker to a provided company group
-        When The company group admin send a request passing idAzienda and idUtente 
-        And The system add the user associated to idUtente to the provided company group associated to idAzienda creating a Blockchain transaction and returning it
+        When The company group admin send a request passing companyId and userId 
+        And The system add the user associated to userId to the provided company group associated to companyId creating a Blockchain transaction and returning it
     
     Scenario: Associate a worker to a provied company group without specifing the company group
-        When The company group admin send a request without passing idAzienda
-        And The system return an error message telling that idAzienda is mandatory
+        When The company group admin send a request without passing companyId
+        And The system return an error message telling that companyId is mandatory
     
-    Scenario: Associate a worker to a provided company group without specifing the idUtente
-        When The company group admin send a request without passing idUtente
-        And The system return an error message telling that idUtente is mandatory
+    Scenario: Associate a worker to a provided company group without specifing the userId
+        When The company group admin send a request without passing userId
+        And The system return an error message telling that userId is mandatory
 
 
     # Scenario about dissociate a worker from a provided company group
     Scenario: Dissociate a worker from a provided company group
-        When The company group admin send a request passing idAzienda and idUtente
+        When The company group admin send a request passing companyId and userId
         And The system make a Blockchain transaction to record that the user is dissociated from the company group
     
-    Scenario: Try to dissociate a worker without passing idUtente
-        When The company group admin send a request passing idAzienda but not idUtente
-        And The system return an error message telling that idUtente is mandatory
+    Scenario: Try to dissociate a worker without passing userId
+        When The company group admin send a request passing companyId but not userId
+        And The system return an error message telling that userId is mandatory
     
-    Scenario: Try to dissociate a worker without passing idAzienda
-        When The company group admin send a request passing idUtente but not idAzienda
-        And The system return an error message telling that the idAzienda is mandatory
+    Scenario: Try to dissociate a worker without passing companyId
+        When The company group admin send a request passing userId but not companyId
+        And The system return an error message telling that the companyId is mandatory
     
