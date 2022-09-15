@@ -18,7 +18,7 @@ class CreateNewCompanyGroupAdminBody {
     type: "string",
     required: true,
   })
-  idUtente: string;
+  userId: string;
 }
 
 @model()
@@ -53,11 +53,10 @@ export class CompaniesController {
 
   @post("/companies/{companyId}/admin", {
     description:
-      "Autorizza un utente pre-esistente ad essere amministratore del gruppo aziendale",
+      "Autorizza un utente pre-esistente ad essere amministratore dell'azienda",
     responses: {
       "200": {
-        description:
-          "Utente promosso ad Admin del gruppo aziendale con successo",
+        description: "Utente promosso ad Admin dell'azienda con successo",
         content: {
           "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
@@ -82,11 +81,35 @@ export class CompaniesController {
     });
   }
 
-  @post("/companies/{companyId}", {
-    description: "Crea un nuovo gruppo aziendale",
+  @get("/companies/{companyId}", {
+    description: "Ritorna l'azienda passata come parametro",
     responses: {
       "200": {
-        description: "Il nuovo gruppo aziendale e' stato creato con successo.",
+        description: "L'azienda richiesta",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(User, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
+  getCompanyGroup(
+    @param.path.string("companyId") companyId: string
+  ): BlockchainTransaction {
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+    });
+  }
+
+  @post("/companies/{companyId}", {
+    description: "Crea una nuova azienda",
+    responses: {
+      "200": {
+        description: "La nuova azienda e' stata creata con successo.",
         content: {
           "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
@@ -98,9 +121,9 @@ export class CompaniesController {
     },
   })
   createNewCompanyGroup(
-    @param.path.string("idAzienda") idAzienda: string,
+    @param.path.string("companyId") companyId: string,
     @requestBody({
-      description: "I dettagli del nuovo gruppo da creare",
+      description: "I dettagli della nuova azienda da creare",
       required: true,
     })
     companyDetails: CreateNewCompanyGroupBody
@@ -112,10 +135,10 @@ export class CompaniesController {
   }
 
   @get("/companies/{companyId}/admin", {
-    description: "Ritorna l'amministratore del gruppo aziendale",
+    description: "Ritorna l'amministratore dell'azienda",
     responses: {
       "200": {
-        description: "L'admin del gruppo aziendale",
+        description: "L'amministratore dell'azienda",
         content: {
           "application/json": {
             schema: getModelSchemaRef(User, {
@@ -134,12 +157,12 @@ export class CompaniesController {
     });
   }
 
-  @post("/companies/{idAzienda}/worker/{idUtente}", {
-    description: "Associa un lavoratore preesistente ad un gruppo Aziendale",
+  @post("/companies/{companyId}/worker/{userId}", {
+    description: "Associa un lavoratore preesistente ad un'azienda",
     responses: {
       "200": {
         description:
-          "L'utente e' stato correttamente aggiunto al gruppo aziendale",
+          "Il lavoratore e' stato correttamente associato all'azienda",
         content: {
           "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
@@ -151,8 +174,8 @@ export class CompaniesController {
     },
   })
   addWorkerToCompanyGroup(
-    @param.path.string("idAzienda") companayId: string,
-    @param.path.string("idUtente") idUtente: string
+    @param.path.string("companyId") companayId: string,
+    @param.path.string("userId") userId: string
   ): BlockchainTransaction {
     return new BlockchainTransaction({
       idTrx: "124w2er2er23",
@@ -160,12 +183,12 @@ export class CompaniesController {
     });
   }
 
-  @del("/companies/{idAzienda}/worker/{idUtente}", {
-    description: "Rimuovere un lavoratore preesistente da un gruppo Aziendale",
+  @del("/companies/{companyId}/worker/{userId}", {
+    description: "Rimuovere un lavoratore preesistente da un'azienda",
     responses: {
       "200": {
         description:
-          "L'utente e' stato correttamente rimosso dal gruppo aziendale",
+          "Il lavoratore e' stato correttamente rimosso dall'azienda",
         content: {
           "application/json": {
             schema: getModelSchemaRef(BlockchainTransaction, {
@@ -177,8 +200,8 @@ export class CompaniesController {
     },
   })
   deleteWorkerFromCompanyGroup(
-    @param.path.string("idAzienda") companayId: string,
-    @param.path.string("idUtente") idUtente: string
+    @param.path.string("companyId") companayId: string,
+    @param.path.string("userId") userId: string
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",

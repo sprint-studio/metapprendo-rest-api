@@ -58,7 +58,7 @@ export class EducationalPathsController {
   createEducationalPath(
     @requestBody({
       description:
-        "Dettagli del percorso formativo che l'admin del gruppo aziendale vuole creare",
+        "Dettagli del percorso formativo che l'admin dell'azienda vuole creare",
       required: true,
     })
     educationalPath: CreateEducationalPathBody
