@@ -1,23 +1,15 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
+  get,
   Request,
   requestBody,
   RestBindings,
+  param,
 } from "@loopback/rest";
 
-import { BlockchainTransaction } from "../models";
-
-@model()
-class CreateEducationalPillBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  idPillola: string;
-}
+import { BlockchainTransaction, EducationalPill } from "../models";
 
 export class EducationalPillsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
@@ -43,11 +35,39 @@ export class EducationalPillsController {
       description: "I dettagli della pillola da dover creare",
       required: true,
     })
-    educationalPill: CreateEducationalPillBody
-  ): BlockchainTransaction {
+    educationalPill: EducationalPill
+  ): BlockchainTransaction<EducationalPill> {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
       dataOraTrx: new Date(),
+      payload: new EducationalPill(),
+    });
+  }
+
+  @get("/educational_pills/{educational_pill}", {
+    description: "",
+    responses: {
+      "200": {
+        describe: "",
+        content: {
+          "application/json": getModelSchemaRef(
+            BlockchainTransaction<EducationalPill>,
+            {
+              includeRelations: true,
+            }
+          ),
+        },
+      },
+    },
+  })
+  getEducationalPill(
+    @param.path.string("educationalPill") educationalPill: string,
+    @param.path.string("transactionId") transactionId: string
+  ): BlockchainTransaction<EducationalPill> {
+    return new BlockchainTransaction({
+      idTrx: "33423422342dsdfew",
+      dataOraTrx: new Date(),
+      payload: new EducationalPill(),
     });
   }
 }
