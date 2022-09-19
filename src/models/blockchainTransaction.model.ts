@@ -1,7 +1,7 @@
 import { Entity, model, property } from "@loopback/repository";
 
 @model()
-export class BlockchainTransaction extends Entity {
+export class BlockchainTransaction<T> extends Entity {
   @property({
     id: true,
     type: "string",
@@ -16,7 +16,13 @@ export class BlockchainTransaction extends Entity {
   })
   dataOraTrx: Date;
 
-  constructor(data?: Partial<BlockchainTransaction>) {
+  @property({
+    type: "object",
+    required: false,
+  })
+  payload: T;
+
+  constructor(data?: Partial<BlockchainTransaction<T>>) {
     super(data);
   }
 }
@@ -25,5 +31,5 @@ export interface BlockchainTransactionRelations {
   // describe navigational properties here
 }
 
-export type BlockchainTransactionWithRelations = BlockchainTransaction &
-  BlockchainTransactionRelations;
+export type BlockchainTransactionWithRelations =
+  BlockchainTransaction<unknown> & BlockchainTransactionRelations;
