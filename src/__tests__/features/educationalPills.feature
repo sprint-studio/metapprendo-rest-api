@@ -15,7 +15,3 @@ Feature: Educational Pills
     Scenario: Try to create a Educational Pills without descrizione
         When The MetApprendo Admin send a request without descrizione property into the body
         Then The System respond with an error telling that descrizione is mandatory
-    
-    Scenario: Try to create a Educational Pills without stato
-        When The MetApprendo Admin send a request without stato property into the body
-        Then The System respond with an error telling that stato is mandatory
