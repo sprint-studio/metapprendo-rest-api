@@ -26,6 +26,12 @@ export class EducationalPath extends Entity {
   })
   idGruppoAziendale: string;
 
+  @property({
+    type: "string",
+    required: true,
+  })
+  data: string;
+
   constructor(data?: Partial<EducationalPath>) {
     super();
   }

@@ -1,5 +1,4 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   del,
   get,
@@ -73,12 +72,7 @@ export class CompaniesController {
     return new BlockchainTransaction<Company>({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
-      payload: new Company({
-        ragioneSociale: "Foobar company",
-        CUA: "222",
-        PIVA: "IT343434",
-        CF: "333DDDWE3E",
-      }),
+      payload: companyDetails,
     });
   }
 
@@ -132,13 +126,13 @@ export class CompaniesController {
       description: "L'id utente da dover autorizzare come admin",
       required: true,
     })
-    userId: User
+    userId: string
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
       payload: new User({
-        userId: "23ewe3e",
+        userId,
         username: "Foobarz",
       }),
     });

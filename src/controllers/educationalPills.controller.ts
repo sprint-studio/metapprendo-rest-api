@@ -40,7 +40,7 @@ export class EducationalPillsController {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
       dataOraTrx: new Date(),
-      payload: new EducationalPill(),
+      payload: educationalPill,
     });
   }
 
