@@ -11,75 +11,10 @@ import {
   RestBindings,
 } from "@loopback/rest";
 import { BlockchainTransaction, User } from "../models";
-
-@model()
-class CreateNewCompanyGroupAdminBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  userId: string;
-}
-
-@model()
-class CreateNewCompanyGroupBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  ragioneSociale: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  CUA: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  PIVA: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  CF: string;
-}
+import Company from "../models/company";
 
 export class CompaniesController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
-
-  @post("/companies/{companyId}/admin", {
-    description:
-      "Autorizza un utente pre-esistente ad essere amministratore dell'azienda",
-    responses: {
-      "200": {
-        description: "Utente promosso ad Admin dell'azienda con successo",
-        content: {
-          "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
-  })
-  createNewCompanyGroupAdmin(
-    @param.path.string("companyId") companyId: string,
-    @requestBody({
-      description: "L'id utente da dover autorizzare come admin",
-      required: true,
-    })
-    userId: CreateNewCompanyGroupAdminBody
-  ): {} {
-    return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
-    });
-  }
 
   @get("/companies/{companyId}", {
     description: "Ritorna l'azienda passata come parametro",
@@ -88,7 +23,7 @@ export class CompaniesController {
         description: "L'azienda richiesta",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(User, {
+            schema: getModelSchemaRef(BlockchainTransaction<Company>, {
               includeRelations: true,
             }),
           },
@@ -96,12 +31,19 @@ export class CompaniesController {
       },
     },
   })
-  getCompanyGroup(
-    @param.path.string("companyId") companyId: string
-  ): BlockchainTransaction {
+  getCompany(
+    @param.path.string("companyId") companyId: string,
+    @param.path.string("transactionId") transactionId: string
+  ): BlockchainTransaction<Company> {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
+      payload: new Company({
+        ragioneSociale: "Foobar company",
+        CUA: "222",
+        PIVA: "IT343434",
+        CF: "333DDDWE3E",
+      }),
     });
   }
 
@@ -112,7 +54,7 @@ export class CompaniesController {
         description: "La nuova azienda e' stata creata con successo.",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction, {
+            schema: getModelSchemaRef(BlockchainTransaction<Company>, {
               includeRelations: true,
             }),
           },
@@ -120,17 +62,23 @@ export class CompaniesController {
       },
     },
   })
-  createNewCompanyGroup(
+  createNewCompany(
     @param.path.string("companyId") companyId: string,
     @requestBody({
       description: "I dettagli della nuova azienda da creare",
       required: true,
     })
-    companyDetails: CreateNewCompanyGroupBody
-  ): BlockchainTransaction {
-    return new BlockchainTransaction({
+    companyDetails: Company
+  ): BlockchainTransaction<Company> {
+    return new BlockchainTransaction<Company>({
       idTrx: "33242rdfwfwer234rr2342",
       dataOraTrx: new Date("2022-08-17"),
+      payload: new Company({
+        ragioneSociale: "Foobar company",
+        CUA: "222",
+        PIVA: "IT343434",
+        CF: "333DDDWE3E",
+      }),
     });
   }
 
@@ -141,7 +89,7 @@ export class CompaniesController {
         description: "L'amministratore dell'azienda",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(User, {
+            schema: getModelSchemaRef(BlockchainTransaction<User>, {
               includeRelations: true,
             }),
           },
@@ -149,11 +97,50 @@ export class CompaniesController {
       },
     },
   })
-  getCompanyGroupAdmin(
-    @param.path.string("companyId") companyId: string
-  ): User {
-    return new User({
-      nomeCompleto: "User",
+  getCompanyAdmin(
+    @param.path.string("companyId") companyId: string,
+    @param.path.string("transactionId") transactionId: string
+  ): BlockchainTransaction<User> {
+    return new BlockchainTransaction<User>({
+      idTrx: "dfrrtetweewfrwer2334re",
+      dataOraTrx: new Date(),
+      payload: new User({
+        nomeCompleto: "Foobarz",
+      }),
+    });
+  }
+
+  @post("/companies/{companyId}/admin", {
+    description:
+      "Autorizza un utente pre-esistente ad essere amministratore dell'azienda",
+    responses: {
+      "200": {
+        description: "Utente promosso ad Admin dell'azienda con successo",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction<User>, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
+  createNewCompanyAdmin(
+    @param.path.string("companyId") companyId: string,
+    @requestBody({
+      description: "L'id utente da dover autorizzare come admin",
+      required: true,
+    })
+    userId: User
+  ): {} {
+    return new BlockchainTransaction({
+      idTrx: "33242rdfwfwer234rr2342",
+      dataOraTrx: new Date("2022-08-17"),
+      payload: new User({
+        userId: "23ewe3e",
+        username: "Foobarz",
+      }),
     });
   }
 
@@ -173,10 +160,10 @@ export class CompaniesController {
       },
     },
   })
-  addWorkerToCompanyGroup(
+  addWorkerToCompany(
     @param.path.string("companyId") companayId: string,
     @param.path.string("userId") userId: string
-  ): BlockchainTransaction {
+  ): BlockchainTransaction<User> {
     return new BlockchainTransaction({
       idTrx: "124w2er2er23",
       dataOraTrx: new Date(),
@@ -199,7 +186,7 @@ export class CompaniesController {
       },
     },
   })
-  deleteWorkerFromCompanyGroup(
+  deleteWorkerFromCompany(
     @param.path.string("companyId") companayId: string,
     @param.path.string("userId") userId: string
   ): {} {
