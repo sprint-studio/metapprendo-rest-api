@@ -12,13 +12,13 @@ export class CompanyEducationalAgenda extends Entity {
     type: "string",
     required: true,
   })
-  idPillola: string;
+  idPill: string;
 
   @property({
     type: "string",
     required: true,
   })
-  idLavoratore: string;
+  idWorker: string;
 }
 
 export interface CompanyEducationalAgendaRelations {

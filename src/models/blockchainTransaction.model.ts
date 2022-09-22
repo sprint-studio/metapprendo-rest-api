@@ -14,7 +14,7 @@ export class BlockchainTransaction<T> extends Entity {
     type: "date",
     required: true,
   })
-  dataOraTrx: Date;
+  timestamp: Date;
 
   @property({
     type: "object",
