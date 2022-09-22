@@ -43,7 +43,7 @@ export class UsersController {
   deactivateUser(@param.path.string("userId") userId: string) {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
     });
   }
 
@@ -71,7 +71,7 @@ export class UsersController {
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
     });
   }
 
@@ -97,7 +97,7 @@ export class UsersController {
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
     });
   }
 }

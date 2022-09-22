@@ -13,8 +13,8 @@ Feature: Users
     When The MetApprendo admin send a request without userId
     Then The System respond with a error messages telling to pass mandatory data
 
-  Scenario: Create a new Company group without passing nomeCompleto
-    When The MetApprendo admin send a request without nomeCompleto
+  Scenario: Create a new Company group without passing fullName
+    When The MetApprendo admin send a request without fullName
     Then The System respond with a error messages telling to pass mandatory data
 
   Scenario: Create a new Company group without passing dataNascita

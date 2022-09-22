@@ -23,7 +23,7 @@ Then("It becomes admin of the company group {string}", async function (group) {
 });
 
 Then("I should receive the user with name {string}", function (expectedName) {
-  this.user.nomeCompleto.should.equal(expectedName);
+  this.user.fullName.should.equal(expectedName);
 });
 
 // Feature Profiles steps
@@ -127,7 +127,7 @@ When("The MetApprendo admin send a request without userId", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without nomeCompleto", async () => {
+When("The MetApprendo admin send a request without fullName", async () => {
   // TODO to implement
 });
 

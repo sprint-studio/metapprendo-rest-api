@@ -41,7 +41,7 @@ export class TrainingPathsController {
   ): {} {
     return new BlockchainTransaction<TrainingPath>({
       idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
       payload: trainingPath,
     });
   }
@@ -68,7 +68,7 @@ export class TrainingPathsController {
   ): BlockchainTransaction<TrainingPath> {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
       payload: new TrainingPath({
         idItem: "3rfdw34r3r",
         idLavoratore: "3refret4w4",

@@ -14,7 +14,7 @@ export class User extends Entity {
     type: "string",
     required: true,
   })
-  nomeCompleto: string;
+  fullName: string;
 
   @property({
     type: "string",

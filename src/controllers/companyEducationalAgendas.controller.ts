@@ -38,7 +38,7 @@ export class CompanyEducationalAgendasController {
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
       payload: companyEducationalAgenda,
     });
   }
@@ -67,7 +67,7 @@ export class CompanyEducationalAgendasController {
   ) {
     return new BlockchainTransaction<CompanyEducationalAgenda>({
       idTrx: "345354FRF345435342",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
       payload: new CompanyEducationalAgenda(),
     });
   }

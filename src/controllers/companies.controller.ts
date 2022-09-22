@@ -36,7 +36,7 @@ export class CompaniesController {
   ): BlockchainTransaction<Company> {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
       payload: new Company({
         ragioneSociale: "Foobar company",
         CUA: "222",
@@ -71,7 +71,7 @@ export class CompaniesController {
   ): BlockchainTransaction<Company> {
     return new BlockchainTransaction<Company>({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
       payload: companyDetails,
     });
   }
@@ -97,9 +97,9 @@ export class CompaniesController {
   ): BlockchainTransaction<User> {
     return new BlockchainTransaction<User>({
       idTrx: "dfrrtetweewfrwer2334re",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
       payload: new User({
-        nomeCompleto: "Foobarz",
+        fullName: "Foobarz",
       }),
     });
   }
@@ -130,7 +130,7 @@ export class CompaniesController {
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
       payload: new User({
         userId,
         username: "Foobarz",
@@ -160,7 +160,7 @@ export class CompaniesController {
   ): BlockchainTransaction<User> {
     return new BlockchainTransaction({
       idTrx: "124w2er2er23",
-      dataOraTrx: new Date(),
+      timestamp: new Date(),
     });
   }
 
@@ -186,7 +186,7 @@ export class CompaniesController {
   ): {} {
     return new BlockchainTransaction({
       idTrx: "33242rdfwfwer234rr2342",
-      dataOraTrx: new Date("2022-08-17"),
+      timestamp: new Date("2022-08-17"),
     });
   }
 }

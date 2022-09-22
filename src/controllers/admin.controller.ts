@@ -29,7 +29,7 @@ export class AdminController {
   getAdmin(): AdminUser {
     return new AdminUser({
       userId: "123",
-      nomeCompleto: "MetApprendo Admin",
+      fullName: "MetApprendo Admin",
     });
   }
 
@@ -51,7 +51,7 @@ export class AdminController {
   createAdmin(): AdminUser {
     return new AdminUser({
       userId: "123",
-      nomeCompleto: "MetApprendo Admin",
+      fullName: "MetApprendo Admin",
     });
   }
 }
