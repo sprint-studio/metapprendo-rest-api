@@ -5,8 +5,9 @@ export default class Company extends Entity {
   @property({
     type: "string",
     required: true,
+    description: "Rappresenta la Ragione Sociale dell'azienda"
   })
-  ragioneSociale: string;
+  companyName: string;
 
   @property({
     type: "string",
