@@ -8,7 +8,7 @@ export class BlockchainTransaction<T> extends Entity {
     required: true,
     generated: false,
   })
-  idTrx: string;
+  transactionId: string;
 
   @property({
     type: "date",
@@ -19,6 +19,7 @@ export class BlockchainTransaction<T> extends Entity {
   @property({
     type: "object",
     required: false,
+    description: "Questo campo non ha un'interfaccia definitiva per cui le informazioni passate possono avere una struttura arbitraria"
   })
   payload: T;
 

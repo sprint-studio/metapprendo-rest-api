@@ -37,7 +37,7 @@ export class EducationalPathsController {
     educationalPath: EducationalPath
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: educationalPath,
     });
@@ -61,7 +61,7 @@ export class EducationalPathsController {
   })
   getEducationalPath(): BlockchainTransaction<EducationalPath> {
     return new BlockchainTransaction({
-      idTrx: "343423432423432423d",
+      transactionId: "343423432423432423d",
       timestamp: new Date(),
       payload: new EducationalPath(),
     });

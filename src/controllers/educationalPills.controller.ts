@@ -38,7 +38,7 @@ export class EducationalPillsController {
     educationalPill: EducationalPill
   ): BlockchainTransaction<EducationalPill> {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: educationalPill,
     });
@@ -65,7 +65,7 @@ export class EducationalPillsController {
     @param.path.string("transactionId") transactionId: string
   ): BlockchainTransaction<EducationalPill> {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: new EducationalPill(),
     });

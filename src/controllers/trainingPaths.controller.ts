@@ -1,5 +1,4 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
@@ -40,7 +39,7 @@ export class TrainingPathsController {
     trainingPath: TrainingPath
   ): {} {
     return new BlockchainTransaction<TrainingPath>({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: trainingPath,
     });
@@ -67,11 +66,11 @@ export class TrainingPathsController {
     @param.path.string("trainingPathId") trainingPathId: string
   ): BlockchainTransaction<TrainingPath> {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: new TrainingPath({
         idItem: "3rfdw34r3r",
-        idLavoratore: "3refret4w4",
+        idWorker: "3refret4w4",
       }),
     });
   }

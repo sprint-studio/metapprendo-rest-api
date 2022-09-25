@@ -37,7 +37,7 @@ export class CompanyEducationalAgendasController {
     companyEducationalAgenda: CompanyEducationalAgenda
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
+      transactionId: "33423422342dsdfew",
       timestamp: new Date(),
       payload: companyEducationalAgenda,
     });
@@ -66,7 +66,7 @@ export class CompanyEducationalAgendasController {
     @param.path.string("transactionId") transactionId: string
   ) {
     return new BlockchainTransaction<CompanyEducationalAgenda>({
-      idTrx: "345354FRF345435342",
+      transactionId: "345354FRF345435342",
       timestamp: new Date(),
       payload: new CompanyEducationalAgenda(),
     });
