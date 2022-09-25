@@ -26,7 +26,7 @@ export class BlockchainRestApiApplication extends BootMixin(
     const {
       basicAuthUsername = process.env.BASIC_AUTH_USERNAME ?? "",
       basicAuthPassword = process.env.BASIC_AUTH_PASSWORD ?? "",
-      basicAuthDisabled = true || process.env.DISABLE_AUTH === "true",
+      basicAuthDisabled = process.env.DISABLE_AUTH === "true",
     } = options;
 
     this.middleware(
