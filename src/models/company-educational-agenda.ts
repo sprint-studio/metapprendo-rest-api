@@ -17,6 +17,7 @@ export class CompanyEducationalAgenda extends Entity {
   @property({
     type: "string",
     required: true,
+    description: "Questo campo rappresenta l'id di un altro utente all'interno del sistema"
   })
   idWorker: string;
 }
