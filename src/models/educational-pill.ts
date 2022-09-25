@@ -6,7 +6,14 @@ export class EducationalPill extends Entity {
     type: "string",
     required: true,
   })
-  idPillola: string;
+  idPill: string;
+
+  @property({
+    type: "object",
+    required: false,
+    description: "Questo campo non ha un'interfaccia definitiva per cui le informazioni passate possono avere una struttura arbitraria"
+  })
+  data: object;
 
   constructor(data?: Partial<EducationalPill>) {
     super(data);
