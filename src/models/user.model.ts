@@ -20,13 +20,13 @@ export class User extends Entity {
     type: "string",
     required: true,
   })
-  sesso: string;
+  gender: string;
 
   @property({
     type: "string",
     required: true,
   })
-  dataNascita: string;
+  birthDay: string;
 
   @property({
     type: "string",
