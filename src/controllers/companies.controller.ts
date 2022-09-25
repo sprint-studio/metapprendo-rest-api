@@ -35,10 +35,10 @@ export class CompaniesController {
     @param.path.string("transactionId") transactionId: string
   ): BlockchainTransaction<Company> {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
       payload: new Company({
-        ragioneSociale: "Foobar company",
+        companyName: "Foobar company",
         CUA: "222",
         PIVA: "IT343434",
         CF: "333DDDWE3E",
@@ -70,7 +70,7 @@ export class CompaniesController {
     companyDetails: Company
   ): BlockchainTransaction<Company> {
     return new BlockchainTransaction<Company>({
-      idTrx: "33242rdfwfwer234rr2342",
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
       payload: companyDetails,
     });
@@ -96,7 +96,7 @@ export class CompaniesController {
     @param.path.string("transactionId") transactionId: string
   ): BlockchainTransaction<User> {
     return new BlockchainTransaction<User>({
-      idTrx: "dfrrtetweewfrwer2334re",
+      transactionId: "dfrrtetweewfrwer2334re",
       timestamp: new Date(),
       payload: new User({
         fullName: "Foobarz",
@@ -129,7 +129,7 @@ export class CompaniesController {
     userId: string
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
       payload: new User({
         userId,
@@ -159,7 +159,7 @@ export class CompaniesController {
     @param.path.string("userId") userId: string
   ): BlockchainTransaction<User> {
     return new BlockchainTransaction({
-      idTrx: "124w2er2er23",
+      transactionId: "124w2er2er23",
       timestamp: new Date(),
     });
   }
@@ -185,7 +185,7 @@ export class CompaniesController {
     @param.path.string("userId") userId: string
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
     });
   }

@@ -18,9 +18,9 @@ Feature: Companies
         When The MetApprendo admin send a request without any data
         And The System respond with a error messages telling to pass mandatory data
 
-    Scenario: Create a new Company group without passing ragioneSociale
-        When The MetApprendo admin send a request without ragioneSociale
-        And The System respond with a error messages telling that ragioneSociale is mandatory
+    Scenario: Create a new Company group without passing companyName
+        When The MetApprendo admin send a request without companyName
+        And The System respond with a error messages telling that companyName is mandatory
     
     Scenario: Create a new Company group without passing CUA
         When The MetApprendo admin send a request without CUA
