@@ -1,5 +1,4 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   del,
   getModelSchemaRef,
@@ -7,23 +6,13 @@ import {
   post,
   Request,
   requestBody,
-  response,
   RestBindings,
 } from "@loopback/rest";
-import { User } from "../models";
-import { BlockchainTransaction } from "../models/blockchainTransaction.model";
 
-@model()
-class UpdateUserDossier {
-  @property({
-    type: "string",
-    required: true,
-  })
-  IdTask: string;
-}
+import { User, UserDossier, BlockchainTransaction } from "../models";
 
 export class UsersController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
+  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
 
   @del("/users/{userId}", {
     description: "Disabilita un utente dall'utilizzo del sistema",
@@ -42,7 +31,7 @@ export class UsersController {
   })
   deactivateUser(@param.path.string("userId") userId: string) {
     return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
     });
   }
@@ -54,7 +43,7 @@ export class UsersController {
         description: "Utente creato con successo",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction, {
+            schema: getModelSchemaRef(BlockchainTransaction<User>, {
               includeRelations: true,
             }),
           },
@@ -69,21 +58,22 @@ export class UsersController {
     })
     user: User
   ): {} {
-    return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+    return new BlockchainTransaction<User>({
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
+      payload: user
     });
   }
 
   @post("/users/{userId}/dossier/education", {
     description:
-      "Aggiorna il dossier formativo dell'utente per inserire una nuova pillola formativa",
+      "Aggiorna il dossier formativo dell'utente",
     responses: {
       "200": {
         description: "Dossier formativo aggiornato con successo",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction, {
+            schema: getModelSchemaRef(BlockchainTransaction<UserDossier>, {
               includeRelations: true,
             }),
           },
@@ -93,11 +83,16 @@ export class UsersController {
   })
   updateUserDossier(
     @param.path.string("userId") userId: string,
-    @requestBody() dossierUpdate: UpdateUserDossier
+    @requestBody({
+      description: "Le nuove informazioni da inserire all'interno del dossier dell'utente.",
+      required: true
+    })
+    dossierUpdate: UserDossier
   ): {} {
-    return new BlockchainTransaction({
-      idTrx: "33242rdfwfwer234rr2342",
+    return new BlockchainTransaction<UserDossier>({
+      transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
+      payload: dossierUpdate
     });
   }
 }
