@@ -6,34 +6,35 @@ export class EducationalPath extends Entity {
     type: "string",
     required: true,
   })
-  idPercorso: string;
+  idPath: string;
 
   @property({
     type: "string",
     required: true,
   })
-  titolo: string;
+  title: string;
 
   @property({
     type: "string",
     required: true,
   })
-  descrizione: string;
+  description: string;
 
   @property({
     type: "string",
     required: true,
   })
-  idGruppoAziendale: string;
+  idCompany: string;
 
   @property({
-    type: "string",
-    required: true,
+    type: "object",
+    required: false,
+    description: "Questo campo non ha un'interfaccia definitiva per cui le informazioni passate possono avere una struttura arbitraria"
   })
-  data: string;
+  data: object;
 
   constructor(data?: Partial<EducationalPath>) {
-    super();
+    super(data);
   }
 }
 
