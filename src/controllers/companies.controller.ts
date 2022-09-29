@@ -9,7 +9,7 @@ import {
   requestBody,
   RestBindings,
 } from "@loopback/rest";
-import { BlockchainTransaction, User } from "../models";
+import { AdminUser, BlockchainTransaction, User } from "../models";
 import Company from "../models/company";
 
 export class CompaniesController {
@@ -123,18 +123,15 @@ export class CompaniesController {
   createNewCompanyAdmin(
     @param.path.string("companyId") companyId: string,
     @requestBody({
-      description: "L'id utente da dover autorizzare come admin",
+      description: "L'utente da dover autorizzare come admin",
       required: true,
     })
-    userId: string
+    user: AdminUser
   ): {} {
     return new BlockchainTransaction({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
-      payload: new User({
-        userId,
-        username: "Foobarz",
-      }),
+      payload: user
     });
   }
 
