@@ -3,6 +3,7 @@ import {
   del,
   getModelSchemaRef,
   param,
+  get,
   post,
   Request,
   requestBody,
@@ -12,7 +13,7 @@ import {
 import { User, UserDossier, BlockchainTransaction } from "../models";
 
 export class UsersController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
+  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
   @del("/users/{userId}", {
     description: "Disabilita un utente dall'utilizzo del sistema",
@@ -61,13 +62,12 @@ export class UsersController {
     return new BlockchainTransaction<User>({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
-      payload: user
+      payload: user,
     });
   }
 
   @post("/users/{userId}/dossier/education", {
-    description:
-      "Aggiorna il dossier formativo dell'utente",
+    description: "Aggiorna il dossier formativo dell'utente",
     responses: {
       "200": {
         description: "Dossier formativo aggiornato con successo",
@@ -84,15 +84,16 @@ export class UsersController {
   updateUserDossier(
     @param.path.string("userId") userId: string,
     @requestBody({
-      description: "Le nuove informazioni da inserire all'interno del dossier dell'utente.",
-      required: true
+      description:
+        "Le nuove informazioni da inserire all'interno del dossier dell'utente.",
+      required: true,
     })
     dossierUpdate: UserDossier
   ): {} {
     return new BlockchainTransaction<UserDossier>({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
-      payload: dossierUpdate
+      payload: dossierUpdate,
     });
   }
 }
