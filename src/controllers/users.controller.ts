@@ -113,7 +113,8 @@ export class UsersController {
     },
   })
   getUserDossier(
-    @param.path.string("userId") userId: string
+    @param.path.string("userId") userId: string,
+    @param.path.string("transactionId") transactionId: string
   ): BlockchainTransaction<UserDossier> {
     return new BlockchainTransaction<UserDossier>({
       transactionId: "33242rdfwfwer234rr2342",
