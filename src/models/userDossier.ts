@@ -2,19 +2,109 @@ import { Entity, model, property } from "@loopback/repository";
 import { User } from "./user.model";
 
 @model()
+export class DossierActivity extends Entity {
+  @property({
+    type: "string",
+    required: false,
+  })
+  type: string;
+
+  @property({
+    type: "string",
+    required: false,
+  })
+  title: string;
+
+  @property({
+    type: "string",
+    required: false,
+  })
+  acceptedFunding: string;
+}
+
+@model()
+export class DossierActivitySupplier extends Entity {
+  @property({
+    type: "string",
+    required: false,
+  })
+  type: string;
+
+  @property({
+    type: "number",
+    required: false,
+  })
+  duration: number;
+
+  @property({
+    type: "string",
+    required: false,
+  })
+  year: number;
+
+  @property({
+    type: "string",
+    required: false,
+  })
+  contents: string;
+
+  @property({
+    type: "array",
+    required: false,
+  })
+  areas: Array<string>;
+}
+
+@model()
+export class DossierDocument extends Entity {
+  @property({
+    type: "array",
+    required: false,
+  })
+  certification: unknown;
+
+  @property({
+    type: "array",
+    required: false,
+  })
+  endorsement: unknown;
+
+  @property({
+    type: "array",
+    required: false,
+  })
+  file: unknown;
+}
+
+@model()
 export class UserDossier extends Entity {
   @property({
     type: "string",
-    required: true
+    required: true,
+    description: "L'id dell'utente da associare al dossier",
   })
-  IdTask: string;
+  idUser: string;
 
   @property({
     type: "object",
     required: true,
-    description: "Questo campo non ha un'interfaccia definitiva per cui le informazioni passate possono avere una struttura arbitraria"
+    description: "L'attivitá formativa da registrare all'intenro del dossier",
   })
-  data: object;
+  activity: DossierActivity;
+
+  @property({
+    type: "object",
+    required: true,
+    description: "L'ente che eroga le attivita' formative",
+  })
+  supplier: DossierActivitySupplier;
+
+  @property({
+    type: "object",
+    required: true,
+    description: "I documenti allegati all'interno del dossier",
+  })
+  document: DossierDocument;
 
   constructor(data?: Partial<User>) {
     super(data);
