@@ -96,4 +96,29 @@ export class UsersController {
       payload: dossierUpdate,
     });
   }
+
+  @get("/users/{userId}/dossier", {
+    description: "Ritorna il dossier dell'utente passato come parametro",
+    responses: {
+      "200": {
+        description: "Il dossier dell'utente passato come parametro",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(BlockchainTransaction<UserDossier>, {
+              includeRelations: true,
+            }),
+          },
+        },
+      },
+    },
+  })
+  getUserDossier(
+    @param.path.string("userId") userId: string
+  ): BlockchainTransaction<UserDossier> {
+    return new BlockchainTransaction<UserDossier>({
+      transactionId: "33242rdfwfwer234rr2342",
+      timestamp: new Date("2022-08-17"),
+      payload: new UserDossier(),
+    });
+  }
 }
