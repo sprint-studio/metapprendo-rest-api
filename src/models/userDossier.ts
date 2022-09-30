@@ -1,4 +1,5 @@
 import { Entity, model, property } from "@loopback/repository";
+import { getJsonSchema } from "@loopback/rest";
 import { User } from "./user.model";
 
 @model()
@@ -50,6 +51,7 @@ export class DossierActivitySupplier extends Entity {
 
   @property({
     type: "array",
+    itemType: "string",
     required: false,
   })
   areas: Array<string>;
@@ -59,18 +61,21 @@ export class DossierActivitySupplier extends Entity {
 export class DossierDocument extends Entity {
   @property({
     type: "array",
+    itemType: "object",
     required: false,
   })
   certification: unknown;
 
   @property({
     type: "array",
+    itemType: "object",
     required: false,
   })
   endorsement: unknown;
 
   @property({
     type: "array",
+    itemType: "object",
     required: false,
   })
   file: unknown;
@@ -83,10 +88,13 @@ export class UserDossier extends Entity {
     required: true,
     description: "L'id dell'utente da associare al dossier",
   })
-  idUser: string;
+  userId: string;
 
   @property({
     type: "object",
+    jsonSchema: getJsonSchema(DossierActivity, {
+      includeRelations: true,
+    }),
     required: true,
     description: "L'attivitá formativa da registrare all'intenro del dossier",
   })
@@ -94,6 +102,9 @@ export class UserDossier extends Entity {
 
   @property({
     type: "object",
+    jsonSchema: getJsonSchema(DossierActivitySupplier, {
+      includeRelations: true,
+    }),
     required: true,
     description: "L'ente che eroga le attivita' formative",
   })
@@ -101,6 +112,9 @@ export class UserDossier extends Entity {
 
   @property({
     type: "object",
+    jsonSchema: getJsonSchema(DossierDocument, {
+      includeRelations: true,
+    }),
     required: true,
     description: "I documenti allegati all'interno del dossier",
   })
