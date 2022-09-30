@@ -62,7 +62,7 @@ export class EducationalPillsController {
   })
   getEducationalPill(
     @param.path.string("educationalPill") educationalPill: string,
-    @param.path.string("transactionId") transactionId: string
+    @param.query.string("transactionId") transactionId: string
   ): BlockchainTransaction<EducationalPill> {
     return new BlockchainTransaction({
       transactionId: "33423422342dsdfew",

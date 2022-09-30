@@ -62,7 +62,7 @@ export class TrainingPathsController {
     },
   })
   getTrainingPath(
-    @param.path.string("transactionId") transactionId: string,
+    @param.query.string("transactionId") transactionId: string,
     @param.path.string("trainingPathId") trainingPathId: string
   ): BlockchainTransaction<TrainingPath> {
     return new BlockchainTransaction({

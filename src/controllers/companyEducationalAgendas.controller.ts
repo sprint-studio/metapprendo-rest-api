@@ -63,7 +63,7 @@ export class CompanyEducationalAgendasController {
   })
   getCompanyEducationalAgenda(
     @param.path.string("companyAgendaId") companyAgendaId: string,
-    @param.path.string("transactionId") transactionId: string
+    @param.query.string("transactionId") transactionId: string
   ) {
     return new BlockchainTransaction<CompanyEducationalAgenda>({
       transactionId: "345354FRF345435342",

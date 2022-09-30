@@ -32,7 +32,7 @@ export class CompaniesController {
   })
   getCompany(
     @param.path.string("companyId") companyId: string,
-    @param.path.string("transactionId") transactionId: string
+    @param.query.string("transactionId") transactionId: string
   ): BlockchainTransaction<Company> {
     return new BlockchainTransaction({
       transactionId: "33242rdfwfwer234rr2342",
@@ -93,7 +93,7 @@ export class CompaniesController {
   })
   getCompanyAdmin(
     @param.path.string("companyId") companyId: string,
-    @param.path.string("transactionId") transactionId: string
+    @param.query.string("transactionId") transactionId: string
   ): BlockchainTransaction<User> {
     return new BlockchainTransaction<User>({
       transactionId: "dfrrtetweewfrwer2334re",
@@ -131,7 +131,7 @@ export class CompaniesController {
     return new BlockchainTransaction({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
-      payload: user
+      payload: user,
     });
   }
 
