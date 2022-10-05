@@ -21,15 +21,6 @@ export class DossierActivity extends Entity {
     required: false,
   })
   acceptedFunding: string;
-}
-
-@model()
-export class DossierActivitySupplier extends Entity {
-  @property({
-    type: "string",
-    required: false,
-  })
-  type: string;
 
   @property({
     type: "number",
@@ -42,6 +33,13 @@ export class DossierActivitySupplier extends Entity {
     required: false,
   })
   year: number;
+
+  @property({
+    type: "string",
+    required: false,
+    // description: "L'ente che eroga le attivita' formative",
+  })
+  supplier: string;
 
   @property({
     type: "string",
@@ -61,21 +59,24 @@ export class DossierActivitySupplier extends Entity {
 export class DossierDocument extends Entity {
   @property({
     type: "array",
-    itemType: "object",
+    itemType: "string",
+    description: "Certification da allegare al dossier trasmessi in base64",
     required: false,
   })
   certification: unknown;
 
   @property({
     type: "array",
-    itemType: "object",
+    itemType: "string",
+    description: "Endorsement da allegare al dossier trasmessi in base64",
     required: false,
   })
   endorsement: unknown;
 
   @property({
     type: "array",
-    itemType: "object",
+    itemType: "string",
+    description: "File da allegare al dossier trasmessi in base64",
     required: false,
   })
   file: unknown;
@@ -93,29 +94,19 @@ export class UserDossier extends Entity {
   @property({
     type: "object",
     jsonSchema: getJsonSchema(DossierActivity, {
-      includeRelations: true,
+      includeRelations: false,
     }),
-    required: true,
+    required: false,
     description: "L'attivitá formativa da registrare all'intenro del dossier",
   })
   activity: DossierActivity;
 
   @property({
     type: "object",
-    jsonSchema: getJsonSchema(DossierActivitySupplier, {
-      includeRelations: true,
-    }),
-    required: true,
-    description: "L'ente che eroga le attivita' formative",
-  })
-  supplier: DossierActivitySupplier;
-
-  @property({
-    type: "object",
     jsonSchema: getJsonSchema(DossierDocument, {
       includeRelations: true,
     }),
-    required: true,
+    required: false,
     description: "I documenti allegati all'interno del dossier",
   })
   document: DossierDocument;

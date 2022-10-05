@@ -17,13 +17,13 @@ export default class Company extends Entity {
 
   @property({
     type: "string",
-    required: true,
+    required: false,
   })
   PIVA: string;
 
   @property({
     type: "string",
-    required: true,
+    required: false,
   })
   CF: string;
 
