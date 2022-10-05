@@ -1,41 +1,15 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
+  get,
   Request,
   requestBody,
   RestBindings,
+  param,
 } from "@loopback/rest";
 
-import { BlockchainTransaction } from "../models";
-
-@model()
-class CreateCompanyEducationalAgendaBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  idTask: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  idPillola: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  idLavoratore: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  stato: string;
-}
+import { BlockchainTransaction, CompanyEducationalAgenda } from "../models";
 
 export class CompanyEducationalAgendasController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
@@ -60,11 +34,41 @@ export class CompanyEducationalAgendasController {
       description: "Dettagli per creare un'agenda formativa aziendale",
       required: true,
     })
-    companyEducationalAgenda: CreateCompanyEducationalAgendaBody
+    companyEducationalAgenda: CompanyEducationalAgenda
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      transactionId: "33423422342dsdfew",
+      timestamp: new Date(),
+      payload: companyEducationalAgenda,
+    });
+  }
+
+  @get("/company_educational_agendas/{company_agenda_id}", {
+    description: "Ritorna l'educational agenda passata come parametro",
+    responses: {
+      "200": {
+        description: "L'educational agenda passata come parametro",
+        content: {
+          "application/json": {
+            schema: getModelSchemaRef(
+              BlockchainTransaction<CompanyEducationalAgenda>,
+              {
+                includeRelations: true,
+              }
+            ),
+          },
+        },
+      },
+    },
+  })
+  getCompanyEducationalAgenda(
+    @param.path.string("companyAgendaId") companyAgendaId: string,
+    @param.query.string("transactionId") transactionId: string
+  ) {
+    return new BlockchainTransaction<CompanyEducationalAgenda>({
+      transactionId: "345354FRF345435342",
+      timestamp: new Date(),
+      payload: new CompanyEducationalAgenda(),
     });
   }
 }

@@ -1,45 +1,38 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from "@loopback/repository";
 
 @model()
 export class User extends Entity {
   @property({
-    type: 'string',
+    type: "string",
     id: true,
     generated: false,
     required: true,
   })
-  idUtente: string;
+  userId: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
-  nomeCompleto: string;
+  fullName: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
-  sesso: string;
+  gender: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
-  dataNascita: string;
+  birthDay: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   username: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  email: string;
-
 
   constructor(data?: Partial<User>) {
     super(data);

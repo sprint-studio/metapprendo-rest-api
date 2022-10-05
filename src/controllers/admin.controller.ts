@@ -1,22 +1,26 @@
-import {inject} from '@loopback/core';
+import { inject } from "@loopback/core";
 import {
-  get, getModelSchemaRef, post, Request, RestBindings
-} from '@loopback/rest';
-import {AdminUser} from '../models';
+  get,
+  getModelSchemaRef,
+  post,
+  Request,
+  RestBindings,
+} from "@loopback/rest";
+import { AdminUser } from "../models";
 
 export class AdminController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
 
-  @get('/admin', {
+  @get("/admin", {
     description: "Ritorna l'utente Admin MetApprendo",
     responses: {
-      '200': {
+      "200": {
         description: `Utente Admin MetApprendo`,
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(AdminUser, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
@@ -24,21 +28,21 @@ export class AdminController {
   })
   getAdmin(): AdminUser {
     return new AdminUser({
-      idUtente: "123",
-      nomeCompleto: "MetApprendo Admin"
+      userId: "123",
+      fullName: "MetApprendo Admin",
     });
   }
 
-  @post('/admin', {
+  @post("/admin", {
     description: "Crea l'utente Admin MetApprendo e ritornalo nella risposta",
     responses: {
-      '200': {
+      "200": {
         description: "Utente Admin MetApprendo",
         content: {
-          'application/json': {
+          "application/json": {
             schema: getModelSchemaRef(AdminUser, {
-              includeRelations: true
-            })
+              includeRelations: true,
+            }),
           },
         },
       },
@@ -46,8 +50,8 @@ export class AdminController {
   })
   createAdmin(): AdminUser {
     return new AdminUser({
-      idUtente: "123",
-      nomeCompleto: "MetApprendo Admin"
+      userId: "123",
+      fullName: "MetApprendo Admin",
     });
   }
 }

@@ -1,20 +1,20 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from "@loopback/repository";
 
 @model()
 export class AdminUser extends Entity {
   @property({
-    type: 'string',
+    type: "string",
     id: true,
     generated: false,
     required: true,
   })
-  idUtente: string;
+  userId: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
-  nomeCompleto: string;
+  fullName: string;
 
   constructor(data?: Partial<AdminUser>) {
     super(data);

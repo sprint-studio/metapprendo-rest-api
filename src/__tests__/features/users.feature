@@ -9,12 +9,12 @@ Feature: Users
     When The MetApprendo admin send a request to create an user
     Then The system send a successful confirmation
 
-  Scenario: Create a new Company group without passing idUtente
-    When The MetApprendo admin send a request without idUtente
+  Scenario: Create a new Company group without passing userId
+    When The MetApprendo admin send a request without userId
     Then The System respond with a error messages telling to pass mandatory data
 
-  Scenario: Create a new Company group without passing nomeCompleto
-    When The MetApprendo admin send a request without nomeCompleto
+  Scenario: Create a new Company group without passing fullName
+    When The MetApprendo admin send a request without fullName
     Then The System respond with a error messages telling to pass mandatory data
 
   Scenario: Create a new Company group without passing dataNascita
@@ -24,12 +24,6 @@ Feature: Users
   Scenario: Create a new Company group without passing username
     When The MetApprendo admin send a request without username
     Then The System respond with a error messages telling to pass mandatory data
-
-  Scenario: Create a new Company group without passing email
-    When The MetApprendo admin send a request without email
-    Then The System respond with a error messages telling to pass mandatory data
-
-
 
   Scenario: Update user dossier
     When The MetApprendo admin send a request to update an user dossier

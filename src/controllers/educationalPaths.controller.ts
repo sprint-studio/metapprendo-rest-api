@@ -1,41 +1,14 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
+  get,
   Request,
   requestBody,
   RestBindings,
 } from "@loopback/rest";
 
-import { BlockchainTransaction } from "../models";
-
-@model()
-class CreateEducationalPathBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  idPercorso: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  titolo: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  descrizione: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  idGruppoAziendale: string;
-}
+import { BlockchainTransaction, EducationalPath } from "../models";
 
 export class EducationalPathsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
@@ -58,14 +31,39 @@ export class EducationalPathsController {
   createEducationalPath(
     @requestBody({
       description:
-        "Dettagli del percorso formativo che l'admin del gruppo aziendale vuole creare",
+        "Dettagli del percorso formativo che l'admin dell'azienda vuole creare",
       required: true,
     })
-    educationalPath: CreateEducationalPathBody
+    educationalPath: EducationalPath
   ): {} {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      transactionId: "33423422342dsdfew",
+      timestamp: new Date(),
+      payload: educationalPath,
+    });
+  }
+
+  @get("/educational_paths/{educational_path_id}", {
+    description: "Ritorna l'education path richiesto come parametro",
+    responses: {
+      "200": {
+        description: "L'education path richiesto",
+        content: {
+          "application/json": getModelSchemaRef(
+            BlockchainTransaction<EducationalPath>,
+            {
+              includeRelations: true,
+            }
+          ),
+        },
+      },
+    },
+  })
+  getEducationalPath(): BlockchainTransaction<EducationalPath> {
+    return new BlockchainTransaction({
+      transactionId: "343423432423432423d",
+      timestamp: new Date(),
+      payload: new EducationalPath(),
     });
   }
 }

@@ -23,7 +23,7 @@ Then("It becomes admin of the company group {string}", async function (group) {
 });
 
 Then("I should receive the user with name {string}", function (expectedName) {
-  this.user.nomeCompleto.should.equal(expectedName);
+  this.user.fullName.should.equal(expectedName);
 });
 
 // Feature Profiles steps
@@ -75,79 +75,6 @@ Then(
   () => {}
 );
 
-When(
-  "The MetApprendo Admin send a request without stato property into the body",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then("The System respond with an error telling that stato is mandatory", () => {
-  // TODO to implement
-});
-
-// Company Group steps
-When(
-  "The MetApprendo admin send a request with all necessary informations to create a Company Group",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then(
-  "The system create a new Company Group making new transaction on the Blockchain and return the informations",
-  () => {
-    // TODO to implement
-  }
-);
-
-When("The MetApprendo admin send a request without idGruppo", () => {
-  // TODO to implement
-});
-
-Then(
-  "The System respond with an error telling that idGruppo is mandatory",
-  () => {
-    // TODO to implement
-  }
-);
-
-When(
-  "The MetApprendo Admin send a request without nome property into the body",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then("The System respond with an error telling that nome is mandatory", () => {
-  // TODO to implement
-});
-
-When(
-  "The MetApprendo Admin send a request without descrizione property into the body",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then(
-  "The System respond with an error telling that descrizione is mandatory",
-  () => {
-    // TODO to implement
-  }
-);
-
-When(
-  "The MetApprendo Admin send a request without stato property into the body",
-  () => {
-    // TODO to implement
-  }
-);
-
-Then("The System respond with an error telling that stato is mandatory", () => {
-  // TODO to implement
-});
-
 // Educational Pills steps
 When(
   "The MetApprendo admin send a request with all necessary informations to create an Educational Pills",
@@ -185,20 +112,22 @@ Then(
   }
 );
 
-
-When("The MetApprendo admin send a request to disable a specific user", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to disable a specific user",
+  async () => {
+    // TODO to implement
+  }
+);
 
 When("The MetApprendo admin send a request to create an user", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without idUtente", async () => {
+When("The MetApprendo admin send a request without userId", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without nomeCompleto", async () => {
+When("The MetApprendo admin send a request without fullName", async () => {
   // TODO to implement
 });
 
@@ -210,14 +139,16 @@ When("The MetApprendo admin send a request without username", async () => {
   // TODO to implement
 });
 
-When("The MetApprendo admin send a request without email", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to update an user dossier",
+  async () => {
+    // TODO to implement
+  }
+);
 
-When("The MetApprendo admin send a request to update an user dossier", async () => {
-  // TODO to implement
-});
-
-When("The MetApprendo admin send a request to update an user dossier without idTask", async () => {
-  // TODO to implement
-});
+When(
+  "The MetApprendo admin send a request to update an user dossier without idTask",
+  async () => {
+    // TODO to implement
+  }
+);

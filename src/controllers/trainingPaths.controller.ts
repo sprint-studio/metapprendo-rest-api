@@ -1,36 +1,16 @@
 import { inject } from "@loopback/core";
-import { model, property } from "@loopback/repository";
 import {
   getModelSchemaRef,
   post,
+  get,
   Request,
   requestBody,
-  response,
   RestBindings,
+  param,
 } from "@loopback/rest";
 
 import { BlockchainTransaction } from "../models";
-
-@model()
-class CreateTrainingPathBody {
-  @property({
-    type: "string",
-    required: true,
-  })
-  idItem: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  idLavoratore: string;
-
-  @property({
-    type: "string",
-    required: true,
-  })
-  stato: string;
-}
+import TrainingPath from "../models/training-path";
 
 export class TrainingPathsController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
@@ -43,7 +23,7 @@ export class TrainingPathsController {
           "Transazione di conferma avvenuta creazione del percorso di istruzione",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction, {
+            schema: getModelSchemaRef(BlockchainTransaction<TrainingPath>, {
               includeRelations: true,
             }),
           },
@@ -56,11 +36,42 @@ export class TrainingPathsController {
       description: "Dettagli per la creazione del percorso di istruzione",
       required: true,
     })
-    trainingPath: CreateTrainingPathBody
+    trainingPath: TrainingPath
   ): {} {
+    return new BlockchainTransaction<TrainingPath>({
+      transactionId: "33423422342dsdfew",
+      timestamp: new Date(),
+      payload: trainingPath,
+    });
+  }
+
+  @get("/training_path/{training_path_id}", {
+    description: "Ritorna il training path passato come paramentro",
+    responses: {
+      "200": {
+        description: "Il training path richiesto",
+        content: {
+          "application/json": getModelSchemaRef(
+            BlockchainTransaction<TrainingPath>,
+            {
+              includeRelations: true,
+            }
+          ),
+        },
+      },
+    },
+  })
+  getTrainingPath(
+    @param.query.string("transactionId") transactionId: string,
+    @param.path.string("trainingPathId") trainingPathId: string
+  ): BlockchainTransaction<TrainingPath> {
     return new BlockchainTransaction({
-      idTrx: "33423422342dsdfew",
-      dataOraTrx: new Date(),
+      transactionId: "33423422342dsdfew",
+      timestamp: new Date(),
+      payload: new TrainingPath({
+        idItem: "3rfdw34r3r",
+        idWorker: "3refret4w4",
+      }),
     });
   }
 }
