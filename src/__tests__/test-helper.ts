@@ -10,7 +10,7 @@ export async function setupApplication(): Promise<AppWithClient> {
     // Empty values (undefined, '') will be ignored by the helper.
     //
     // host: process.env.HOST,
-    // port: +process.env.PORT,
+    // port: process.env.PORT,
   });
 
   const app = new BlockchainRestApiApplication({

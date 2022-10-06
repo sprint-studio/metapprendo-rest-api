@@ -19,6 +19,7 @@
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "test:e2e": "npm run pretest && cucumber-js --config cucumber.json",
+    "test-publish:e2e": "CUCUMBER_PUBLISH_ENABLED=true npm run pretest && cucumber-js --config cucumber.json --publish",
     "docker:build": "docker build -t metapprendo-rest-api .",
     "docker:run": "docker run -p 3000:3000 -d metapprendo-rest-api",
     "preopenapi-spec": "npm run build",
