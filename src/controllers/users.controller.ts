@@ -1,19 +1,19 @@
-import { inject } from "@loopback/core";
+import {inject, service} from "@loopback/core";
 import {
-  del,
-  getModelSchemaRef,
-  param,
-  get,
-  post,
+  del, get, getModelSchemaRef,
+  param, post,
   Request,
   requestBody,
-  RestBindings,
+  RestBindings
 } from "@loopback/rest";
 
-import { User, UserDossier, BlockchainTransaction } from "../models";
+import {BlockchainTransaction, User, UserDossier} from "../models";
+import {UserDossierUpdate} from '../models/userDossierUpdate';
+import {UserDossierService} from '../services';
 
 export class UsersController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
+  constructor(@inject(RestBindings.Http.REQUEST) private req: Request,
+  @service(UserDossierService) public userDossierService: UserDossierService) {}
 
   @del("/users/{userId}", {
     description: "Disabilita un utente dall'utilizzo del sistema",
@@ -66,7 +66,7 @@ export class UsersController {
     });
   }
 
-  @post("/users/{userId}/dossier/education", {
+  @post("/users/{userId}/dossier", {
     description: "Aggiorna il dossier formativo dell'utente",
     responses: {
       "200": {
@@ -81,18 +81,19 @@ export class UsersController {
       },
     },
   })
-  updateUserDossier(
+  async updateUserDossier(
     @param.path.string("userId") userId: string,
     @requestBody({
       description:
         "Le nuove informazioni da inserire all'interno del dossier dell'utente.",
       required: true,
     })
-    dossierUpdate: UserDossier
-  ): {} {
-    return new BlockchainTransaction<UserDossier>({
+    dossierUpdate: UserDossierUpdate
+  ): Promise<BlockchainTransaction<UserDossierUpdate>> {
+    await this.userDossierService.addActivityToUserDossier(dossierUpdate, userId);
+    return new BlockchainTransaction<UserDossierUpdate>({
       transactionId: "33242rdfwfwer234rr2342",
-      timestamp: new Date("2022-08-17"),
+      timestamp: new Date(),
       payload: dossierUpdate,
     });
   }
@@ -112,14 +113,15 @@ export class UsersController {
       },
     },
   })
-  getUserDossier(
+  async getUserDossier(
     @param.path.string("userId") userId: string,
     @param.query.string("transactionId") transactionId: string
-  ): BlockchainTransaction<UserDossier> {
+  ): Promise<BlockchainTransaction<UserDossier>> {
+    const dossier = await this.userDossierService.getUserDossier(userId);
     return new BlockchainTransaction<UserDossier>({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),
-      payload: new UserDossier(),
+      payload: dossier
     });
   }
 }
