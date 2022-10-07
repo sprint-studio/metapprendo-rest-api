@@ -1,7 +1,5 @@
 import {Entity, model, property} from "@loopback/repository";
 import {getJsonSchema} from "@loopback/rest";
-import {DossierDocument} from '.';
-import {User} from "./user.model";
 
 @model()
 export class ActivityFileNoShasum extends Entity {
@@ -18,13 +16,17 @@ export class ActivityFileNoShasum extends Entity {
     required: true,
   })
   fileName: string;
+
+  constructor(data?: Partial<ActivityFileNoShasum>) {
+    super(data);
+  }
 }
 
 @model()
 export class DossierActivityUpdate extends Entity {
   @property({
     type: "string",
-    required: false,
+    required: true,
   })
   id: string;
 
@@ -76,6 +78,10 @@ export class DossierActivityUpdate extends Entity {
     required: false,
   })
   areas: Array<string>;
+
+  constructor(data?: Partial<DossierActivityUpdate>) {
+    super(data);
+  }
 }
 
 @model()
@@ -96,7 +102,7 @@ export class DossierDocumentUpdate extends Entity {
   })
   file: ActivityFileNoShasum[];
 
-  constructor(data?: Partial<DossierDocument>) {
+  constructor(data?: Partial<DossierDocumentUpdate>) {
     super(data);
   }
 }
@@ -130,7 +136,7 @@ export class UserDossierUpdate extends Entity {
   })
   document: DossierDocumentUpdate;
 
-  constructor(data?: Partial<User>) {
+  constructor(data?: Partial<UserDossierUpdate>) {
     super(data);
   }
 }

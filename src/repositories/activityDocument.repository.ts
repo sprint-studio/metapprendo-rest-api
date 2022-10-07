@@ -6,57 +6,75 @@ import {ActivityFile, DossierActivity, DossierDocument, DossierDocumentUpdate} f
 export class ActivityDocumentRepository {
   private fileRootPath: string;
 
-  constructor() {
-    if(!process.env.FILE_ROOT_PATH) {
+  constructor(private fsMkdir: typeof mkdir = mkdir,
+    private fsWriteFile: typeof writeFile = writeFile,
+    private fsReadFile: typeof readFile = readFile) {
+    if (!process.env.FILE_ROOT_PATH) {
       throw new Error("Please specify FILE_ROOT_PATH env variable")
     }
     this.fileRootPath = process.env.FILE_ROOT_PATH;
   }
 
-  private getPathFromUserAndActivity(userId: string,
-    activityId: string): string {
-      return `${this.fileRootPath}/${userId}/${activityId}`;
+  private getPathsFromUserAndActivity(userId: string,
+    activityId: string) {
+    const finalPath = `${this.fileRootPath}/${userId}/${activityId}`;
+    return {
+      certificationsPath: `${finalPath}/certifications`,
+      endorsementsPath: `${finalPath}/endorsements`,
+      filesPath: `${finalPath}/files`
     }
+
+  }
+
 
   async saveActivityDocument(
     userId: string,
     activityId: string,
     dossierDocument: DossierDocumentUpdate
-  ): Promise<boolean> {
-    const finalPath = this.getPathFromUserAndActivity(userId, activityId);
-    await mkdir(finalPath, { recursive: true });
-    await mkdir(`${finalPath}/certifications`);
-    await mkdir(`${finalPath}/endorsements`);
-    await mkdir(`${finalPath}/files`);
+  ): Promise<void> {
+    const {
+      certificationsPath,
+      endorsementsPath,
+      filesPath
+    } = this.getPathsFromUserAndActivity(userId, activityId);
+
+    await this.fsMkdir(certificationsPath, {recursive: true});
+    await this.fsMkdir(endorsementsPath, {recursive: true});
+    await this.fsMkdir(filesPath, {recursive: true});
 
     await Promise.all(dossierDocument.certification.map(async fileObj =>
-      writeFile(`${finalPath}/certifications/c1`, Buffer.from(fileObj.content, 'base64'))));
+      this.fsWriteFile(`${certificationsPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'))));
 
     await Promise.all(dossierDocument.endorsement.map(async fileObj =>
-      writeFile(`${finalPath}/endorsements/e1`, Buffer.from(fileObj.content, 'base64'))));
+      this.fsWriteFile(`${endorsementsPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'))));
 
     await Promise.all(dossierDocument.file.map(async fileObj =>
-      writeFile(`${finalPath}/files/f1`, Buffer.from(fileObj.content, 'base64'))));
-    return true;
+      this.fsWriteFile(`${filesPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'))));
   }
 
-  async attachFileContentsToActivity(
+  async retrieveFileContentsInActivity(
     userId: string,
     activity: DossierActivity
   ): Promise<DossierActivity> {
     const {id: activityId, document} = activity;
-    const finalPath = this.getPathFromUserAndActivity(userId, activityId);
+    const {
+      certificationsPath,
+      endorsementsPath,
+      filesPath
+    } = this.getPathsFromUserAndActivity(userId, activityId);
 
-    const putContentInDossierFile = (path: string) => async (dossierFile: ActivityFile) => ({
+    const putContentInDossierFile = (path: string) => async (dossierFile: ActivityFile) => {
+
+      return {
       ...dossierFile,
-      content: await readFile(`${path}/${dossierFile.fileName}`, {encoding: 'base64'})
-    })
+      content: await this.fsReadFile(`${path}/${dossierFile.fileName}`, {encoding: 'base64'})
+    }}
 
-    const newCertifications = (await Promise.all(document.certification.map(putContentInDossierFile(`${finalPath}/certifications`))))
+    const newCertifications = (await Promise.all(document.certification.map(putContentInDossierFile(certificationsPath))))
       .map(f => new ActivityFile(f));
-    const newEndorsements = (await Promise.all(document.endorsement.map(putContentInDossierFile(`${finalPath}/endorments`))))
+    const newEndorsements = (await Promise.all(document.endorsement.map(putContentInDossierFile(endorsementsPath))))
       .map(f => new ActivityFile(f));
-    const newFiles =( await Promise.all(document.file.map(putContentInDossierFile(`${finalPath}/files`))))
+    const newFiles = (await Promise.all(document.file.map(putContentInDossierFile(filesPath))))
       .map(f => new ActivityFile(f));
 
     const documentWithFileContents = new DossierDocument({

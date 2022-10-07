@@ -17,6 +17,7 @@
     "pretest": "npm run rebuild",
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
+    "test:unit": "npm run pretest && lb-mocha --require dist/__tests__/test-helper.js --allow-console-logs dist/**/*.test.js",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "test:e2e": "npm run pretest && cucumber-js --config cucumber.json",
     "docker:build": "docker build -t metapprendo-rest-api .",
@@ -65,6 +66,9 @@
     "@types/node": "14.18.21",
     "chai": "4.3.6",
     "eslint": "8.22.0",
+    "fs-monkey": "1.0.3",
+    "memfs": "3.4.7",
+    "sinon": "14.0.1",
     "source-map-support": "0.5.21",
     "ts-node": "10.9.1",
     "typescript": "4.7.4"
