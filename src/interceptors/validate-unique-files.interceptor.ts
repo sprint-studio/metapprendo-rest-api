@@ -8,15 +8,17 @@ import {
 } from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import {isEqual} from 'lodash/fp';
-import {ActivityFile, DossierDocument} from '../models';
+import {ActivityFileNoShasum, DossierDocument, UserDossierUpdate} from '../models';
 
 /**
  * This class will be bound to the application as an `Interceptor` during
  * `boot`
  */
+type ActivityElementWithDuplicateFilenames = [string, ActivityFileNoShasum[]]
 @injectable({tags: {key: ValidateUniqueFilesInterceptor.BINDING_KEY}})
 export class ValidateUniqueFilesInterceptor implements Provider<Interceptor> {
   static readonly BINDING_KEY = `interceptors.${ValidateUniqueFilesInterceptor.name}`;
+
 
   /*
   constructor() {}
@@ -44,25 +46,44 @@ export class ValidateUniqueFilesInterceptor implements Provider<Interceptor> {
     next: () => ValueOrPromise<InvocationResult>,
   ) {
 
-    if (invocationCtx.args.filter(a => this.isUserDossierDocument(a))
-      .map(udd => udd.document)
-      .some((dd: DossierDocument) =>
-        this.hasDuplicateFilenames(dd.certification) ||
-        this.hasDuplicateFilenames(dd.endorsement) ||
-        this.hasDuplicateFilenames(dd.file))
+    const elementWithDuplicateFilenames = invocationCtx.args
+      .filter(a => this.isUserDossierDocument(a))
+      .map(a => this.getElementWithDuplicateFilenames(a))
+      .find(a => a)
+
+    if (
+      elementWithDuplicateFilenames
     ) {
-      throw new HttpErrors.UnprocessableEntity(
-        'File names must be unique',
+      const error = new HttpErrors.UnprocessableEntity(
+        `Provided file names for ${elementWithDuplicateFilenames[0]} must be unique`,
       );
+      error.code = "VALIDATION_FAILED";
+      error.details = [
+        {
+          "path": `/document/${elementWithDuplicateFilenames[0]}`,
+          "code": "uniqueItemProperties",
+          "message": "should pass \"uniqueItemProperties\" keyword validation",
+          "info": {
+            "duplicatePropert": "fileName"
+          }
+        }
+      ];
+      throw error;
     }
     const result = await next();
     return result;
   }
 
-  hasDuplicateFilenames(files: ActivityFile[]): Boolean {
-    const nameSet = new Set(files.map(f => f.fileName));
-    console.log('scopare', nameSet, files.length);
-    return nameSet.size !== files.length;
+  getElementWithDuplicateFilenames(dossier: UserDossierUpdate): ActivityElementWithDuplicateFilenames | undefined {
+    const keyWithDuplicateFilename = Object
+      .entries(dossier.document)
+      .find((el: [string, ActivityFileNoShasum[]]) => {
+        const [, files] = el;
+        const filenamesSet = new Set(files.map(f => f.fileName));
+        return filenamesSet.size !== files.length;
+      })
+    return keyWithDuplicateFilename;
+
   }
 
   isUserDossierDocument(obj?: {
