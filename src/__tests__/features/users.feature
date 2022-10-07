@@ -9,19 +9,19 @@ Feature: Users
     When The MetApprendo admin send a request to create an user
     Then The system send a successful confirmation
 
-  Scenario: Create a new Company group without passing userId
+  Scenario: Create a new Company without passing userId
     When The MetApprendo admin send a request without userId
     Then The System respond with a error messages telling to pass mandatory data
 
-  Scenario: Create a new Company group without passing fullName
+  Scenario: Create a new Company without passing fullName
     When The MetApprendo admin send a request without fullName
     Then The System respond with a error messages telling to pass mandatory data
 
-  Scenario: Create a new Company group without passing dataNascita
+  Scenario: Create a new Company without passing dataNascita
     When The MetApprendo admin send a request without dataNascita
     Then The System respond with a error messages telling to pass mandatory data
 
-  Scenario: Create a new Company group without passing username
+  Scenario: Create a new Company without passing username
     When The MetApprendo admin send a request without username
     Then The System respond with a error messages telling to pass mandatory data
 

@@ -11,14 +11,14 @@ When("The MetApprendo Admin user is created", async function () {
 });
 
 When(
-  "an existing user is assigned to be admin of an existing company group {string}",
+  "an existing user is assigned to be admin of an existing company {string}",
   async function (group) {
     const res = await this.client.post(`/companies/${group}/admin`).expect(200);
     this.user = res.body;
   }
 );
 
-Then("It becomes admin of the company group {string}", async function (group) {
+Then("It becomes admin of the company {string}", async function (group) {
   // TODO to implement
 });
 
@@ -36,7 +36,7 @@ When(
 
 Then(
   "The system create a new profile making new transaction on the Blockchain and the transaction informations",
-  () => {}
+  () => { }
 );
 
 When(
@@ -48,7 +48,7 @@ When(
 
 Then(
   "The System respond with an error telling that idProfilo is mandatory",
-  () => {}
+  () => { }
 );
 
 When(
@@ -60,7 +60,7 @@ When(
 
 Then(
   "The System respond with an error telling that nome is mandatory",
-  () => {}
+  () => { }
 );
 
 When(
@@ -72,7 +72,7 @@ When(
 
 Then(
   "The System respond with an error telling that descrizione is mandatory",
-  () => {}
+  () => { }
 );
 
 // Educational Pills steps
