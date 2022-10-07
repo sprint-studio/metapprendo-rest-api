@@ -49,7 +49,7 @@ export class ActivityDocumentRepository {
 
     const putContentInDossierFile = (path: string) => async (dossierFile: ActivityFile) => ({
       ...dossierFile,
-      content: await readFile(`${path}/${dossierFile.name}`, {encoding: 'base64'})
+      content: await readFile(`${path}/${dossierFile.fileName}`, {encoding: 'base64'})
     })
 
     const newCertifications = (await Promise.all(document.certification.map(putContentInDossierFile(`${finalPath}/certifications`))))

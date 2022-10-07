@@ -22,8 +22,8 @@ export class UserDossierService {
 
   async addActivityToUserDossier(dossier: UserDossierUpdate, userId: string, activityId = "1"): Promise<void> {
     // call chaincode to save activity
-    const certs = dossier.document.certification.map(c => ({...c, sha256hash: this.computeFileHash(c.content)}));
-    console.log('certs...', {certs});
+    // const certs = dossier.document.certification.map(c => ({...c, sha256hash: this.computeFileHash(c.content)}));
+    // console.log('certs...', {certs});
     await this.activityDocumentRepository.saveActivityDocument(userId, activityId, dossier.document)
   }
 
@@ -41,17 +41,17 @@ export class UserDossierService {
       certification: [new ActivityFile({
         content: "",
         sha256checksum: "",
-        name: "a.svg"
+        fileName: "a.svg"
       })],
       endorsement: [new ActivityFile({
         content: "",
         sha256checksum: "",
-        name: "a.svg"
+        fileName: "a.svg"
       })],
       file: [new ActivityFile({
         content: "",
         sha256checksum: "",
-        name: "a.svg"
+        fileName: "a.svg"
       })],
     })
 

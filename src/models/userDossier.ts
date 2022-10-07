@@ -14,12 +14,12 @@ export class ActivityFile extends Entity {
   content: string;
 
   @property({
-    type: "name",
+    type: "string",
     itemType: "string",
     description: "Nome del file",
     required: false,
   })
-  name: string;
+  fileName: string;
 
   @property({
     type: "sha256checksum",

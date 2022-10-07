@@ -3,22 +3,21 @@ import {getJsonSchema} from "@loopback/rest";
 import {DossierDocument} from '.';
 import {User} from "./user.model";
 
-export class ActivityFileNoContent extends Entity {
+@model()
+export class ActivityFileNoShasum extends Entity {
   @property({
     type: "string",
-    itemType: "string",
     description: "Contenuto del file rappresentato in base64",
     required: true,
   })
   content: string;
 
   @property({
-    type: "name",
-    itemType: "string",
+    type: "string",
     description: "Nome del file",
     required: true,
   })
-  name: string;
+  fileName: string;
 }
 
 @model()
@@ -81,35 +80,21 @@ export class DossierActivityUpdate extends Entity {
 
 @model()
 export class DossierDocumentUpdate extends Entity {
-  @property({
-    type: "array",
-    itemType: "object",
-    jsonSchema: getJsonSchema(Array<ActivityFileNoContent>, {
-      includeRelations: true,
-    }),
-    description: "Certification da allegare al dossier trasmessi in base64",
-    required: false,
+  @property.array(Object, {
+    jsonSchema: getJsonSchema(ActivityFileNoShasum)
   })
-  certification: ActivityFileNoContent[];
+  certification: ActivityFileNoShasum[];
 
-  @property({
-    type: "array",
-    itemType: "object",
-    jsonSchema: getJsonSchema(Array<ActivityFileNoContent>, {
-      includeRelations: true,
-    }),
-    description: "Endorsement da allegare al dossier trasmessi in base64",
-    required: false,
+  @property.array(Object, {
+    jsonSchema: getJsonSchema(ActivityFileNoShasum)
   })
-  endorsement: ActivityFileNoContent[];
+  endorsement: ActivityFileNoShasum[];
 
-  @property({
-    type: "array",
-    itemType: "object",
-    description: "Files da allegare al dossier trasmessi in base64",
-    required: false,
+
+  @property.array(Object, {
+    jsonSchema: getJsonSchema(ActivityFileNoShasum)
   })
-  file: ActivityFileNoContent[];
+  file: ActivityFileNoShasum[];
 
   constructor(data?: Partial<DossierDocument>) {
     super(data);
@@ -130,7 +115,7 @@ export class UserDossierUpdate extends Entity {
     jsonSchema: getJsonSchema(DossierActivityUpdate, {
       includeRelations: false,
     }),
-    required: false,
+    required: true,
     description: "L'attivitá formativa da registrare all'intenro del dossier",
   })
   activity: DossierActivityUpdate;
@@ -140,7 +125,7 @@ export class UserDossierUpdate extends Entity {
     jsonSchema: getJsonSchema(DossierDocumentUpdate, {
       includeRelations: true,
     }),
-    required: false,
+    required: true,
     description: "I documenti allegati all'interno del dossier",
   })
   document: DossierDocumentUpdate;

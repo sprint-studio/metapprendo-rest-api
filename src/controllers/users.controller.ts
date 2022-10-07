@@ -1,4 +1,4 @@
-import {inject, service} from "@loopback/core";
+import {inject, intercept, service} from "@loopback/core";
 import {
   del, get, getModelSchemaRef,
   param, post,
@@ -6,11 +6,14 @@ import {
   requestBody,
   RestBindings
 } from "@loopback/rest";
+import {ValidateUniqueFilesInterceptor} from '../interceptors';
 
 import {BlockchainTransaction, User, UserDossier} from "../models";
 import {UserDossierUpdate} from '../models/userDossierUpdate';
 import {UserDossierService} from '../services';
 
+// Add this line to apply interceptor to this class
+@intercept(ValidateUniqueFilesInterceptor.BINDING_KEY)
 export class UsersController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request,
   @service(UserDossierService) public userDossierService: UserDossierService) {}
@@ -81,6 +84,7 @@ export class UsersController {
       },
     },
   })
+
   async updateUserDossier(
     @param.path.string("userId") userId: string,
     @requestBody({
