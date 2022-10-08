@@ -46,7 +46,7 @@ describe('The ActivityDocumentRepository', () => {
       })
     }),
     ]
-  })
+  });
 
   const testDossierRequest = new UserDossierUpdate({
     userId: "userId",

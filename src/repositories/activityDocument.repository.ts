@@ -42,8 +42,10 @@ export class ActivityDocumentRepository {
     await this.fsMkdir(endorsementsPath, {recursive: true});
     await this.fsMkdir(filesPath, {recursive: true});
 
-    await Promise.all(dossierDocument.certification.map(async fileObj =>
-      this.fsWriteFile(`${certificationsPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'))));
+    await Promise.all(dossierDocument.certification.map(async fileObj => {
+      await this.fsWriteFile(`${certificationsPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'));
+    }));
+
 
     await Promise.all(dossierDocument.endorsement.map(async fileObj =>
       this.fsWriteFile(`${endorsementsPath}/${fileObj.fileName}`, Buffer.from(fileObj.content, 'base64'))));

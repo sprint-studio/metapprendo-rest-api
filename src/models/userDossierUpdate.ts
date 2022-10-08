@@ -61,7 +61,7 @@ export class DossierActivityUpdate extends Entity {
   duration: number;
 
   @property({
-    type: "string",
+    type: "number",
     required: false,
   })
   year: number;
