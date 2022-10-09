@@ -4,7 +4,7 @@ const { setupApplication } = require('../../test-helper');
 const fs = require('node:fs/promises');
 require('chai').should()
 
-import { parallelCanAssignHelpers, setParallelCanAssign } from '@cucumber/cucumber';
+const { parallelCanAssignHelpers, setParallelCanAssign } = require('@cucumber/cucumber');
 
 const { atMostOnePicklePerTag } = parallelCanAssignHelpers
 const myTagRule = atMostOnePicklePerTag(["@filesysmte"]);
@@ -18,9 +18,9 @@ BeforeStep({ tags: "@filesystem" }, async () => {
   await fs.mkdir(`${process.env.FILE_ROOT_PATH}/user1/activity1/certifications`, { recursive: true });
   await fs.mkdir(`${process.env.FILE_ROOT_PATH}/user1/activity1/endorsements`, { recursive: true });
   await fs.mkdir(`${process.env.FILE_ROOT_PATH}/user1/activity1/files`, { recursive: true });
-  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/certifications/a.svg`, Buffer.from("Y29udGVudGFzdmc=", "base64"))
-  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/endorsements/b.svg`, Buffer.from("Y29udGVudGJzdmc=", "base64"))
-  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/files/c.svg`, Buffer.from("Y29udGVudGNzdmc=", "base64"))
+  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/certifications/a.svg12345678`, Buffer.from("Y29udGVudGFzdmc=", "base64"))
+  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/endorsements/b.svg12345678`, Buffer.from("Y29udGVudGJzdmc=", "base64"))
+  await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/files/c.svg12345678`, Buffer.from("Y29udGVudGNzdmc=", "base64"))
 });
 AfterStep({ tags: "@filesystem" }, async () => {
   await fs.rm(`${process.env.FILE_ROOT_PATH}/user1`, { recursive: true });

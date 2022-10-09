@@ -116,14 +116,14 @@ export class DossierActivity extends Entity {
 
   @property({
     type: "string",
-    required: false,
+    required: true,
   })
   contents: string;
 
   @property({
     type: "array",
     itemType: "string",
-    required: false,
+    required: true,
   })
   areas: Array<string>;
 
