@@ -137,7 +137,6 @@ When(
   "The MetApprendo admin sends a request to update dossier for {string}",
   async function (user) {
     this.requestBody = dossierUpdateRequest.toJSON();
-
     const {
       res,
       newlyCreatedCertificationFilename,

@@ -3,7 +3,7 @@ import {repository} from '@loopback/repository/dist';
 import {createHash, randomBytes} from 'crypto';
 
 import {ActivityFile, ActivityFileNoShasum, DossierActivity, DossierDocument, DossierDocumentUpdate, User, UserDossier, UserDossierUpdate} from '../models';
-import {ActivityDocumentRepository} from '../repositories/activityDocument.repository';
+import {ActivityDocumentRepository} from '../repositories';
 
 
 

@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import filesystem from 'node:fs/promises';
 import sinon from 'sinon';
+import {ActivityDocumentRepository} from '../';
 import {ActivityFile, ActivityFileNoShasum, DossierActivity, DossierActivityUpdate, DossierDocument, DossierDocumentUpdate, User, UserDossier, UserDossierUpdate} from '../../models';
-import {ActivityDocumentRepository} from '../activityDocument.repository';
 
 describe('The ActivityDocumentRepository', () => {
   let repo: ActivityDocumentRepository;
+
   let mkdir: sinon.SinonStub;
   let writeFile: sinon.SinonStub;
   let readFile: sinon.SinonStub;
