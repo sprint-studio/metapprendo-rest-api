@@ -91,6 +91,11 @@ export class UsersController {
       description:
         "Le nuove informazioni da inserire all'interno del dossier dell'utente.",
       required: true,
+      content: {
+        "application/json": {
+          schema: getModelSchemaRef(BlockchainTransaction<UserDossierUpdate>),
+        },
+      },
     })
     dossierUpdate: UserDossierUpdate
   ): Promise<BlockchainTransaction<UserDossierUpdate>> {
@@ -109,9 +114,7 @@ export class UsersController {
         description: "Il dossier dell'utente passato come parametro",
         content: {
           "application/json": {
-            schema: getModelSchemaRef(BlockchainTransaction<UserDossier>, {
-              includeRelations: true,
-            }),
+            schema: getModelSchemaRef(BlockchainTransaction<UserDossier>),
           },
         },
       },

@@ -1,26 +1,11 @@
 import {Entity, model, property} from "@loopback/repository";
 import {getJsonSchema} from "@loopback/rest";
 import {User} from './user.model';
+import {ActivityFileNoShasum} from './userDossierUpdate';
 
 
 @model()
-export class ActivityFile extends Entity {
-  @property({
-    type: "string",
-    itemType: "string",
-    description: "Contenuto del file rappresentato in base64",
-    required: false,
-  })
-  content: string;
-
-  @property({
-    type: "string",
-    itemType: "string",
-    description: "Nome del file",
-    required: false,
-  })
-  fileName: string;
-
+export class ActivityFile extends ActivityFileNoShasum {
   @property({
     type: "sha256checksum",
     itemType: "string",
