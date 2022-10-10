@@ -9,7 +9,7 @@ export default class EndpointsManager {
   }
 
   static companyAdminEndpoint(companayId: string): string {
-    return `${this.companyAdminEndpoint(companayId)}/admin`;
+    return `${this.companyEndpoint(companayId)}/admin`;
   }
 
   static addWorkerToCompanyEndpoint(companayId: string, userId: string): string {
