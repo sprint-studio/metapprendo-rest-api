@@ -1,5 +1,5 @@
+import {RestServerConfig} from '@loopback/rest';
 import {ApplicationConfig, BlockchainRestApiApplication} from './application';
-
 export * from './application';
 
 
@@ -17,9 +17,8 @@ export async function main(options: ApplicationConfig = {}) {
 
 if (require.main === module) {
   // Run the application
-  const config = {
-    rest: {
-      port: +(process.env.PORT ?? 3000),
+  const rest: RestServerConfig = {
+      // port: +(process.env.PORT ?? 3000),
       host: process.env.HOST,
       // The `gracePeriodForClose` provides a graceful close for http/https
       // servers with keep-alive clients. The default value is `Infinity`
@@ -30,9 +29,10 @@ if (require.main === module) {
       openApiSpec: {
         // useful when used with OpenAPI-to-GraphQL to locate your application
         setServersFromRequest: true,
-      },
-    },
+      }
   };
+
+  const config = {rest};
   main(config).catch(err => {
     console.error('Cannot start the application.', err);
     process.exit(1);
