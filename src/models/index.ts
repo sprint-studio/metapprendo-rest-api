@@ -1,4 +1,5 @@
 export * from "./adminUser.model";
+export * from "./company";
 export * from "./blockchainTransaction.model";
 export * from "./company-educational-agenda";
 export * from "./educational-path";
@@ -7,4 +8,3 @@ export * from "./training-path";
 export * from "./user.model";
 export * from "./userDossier";
 export * from "./userDossierUpdate";
-
