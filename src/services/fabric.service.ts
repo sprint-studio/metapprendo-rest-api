@@ -33,26 +33,22 @@ export class FabricService {
       encoding: "utf8",
       flag: "r",
     });
-    console.log({ TLS_CERT: this.TLS_CERT });
 
     this.CLIENT_CERT = fs.readFileSync(CLIENT_CERT_PATH, {
       encoding: "utf8",
       flag: "r",
     });
-    console.log({ CLIENT_CERT: this.CLIENT_CERT });
 
     this.CLIENT_KEY = fs.readFileSync(CLIENT_KEY_PATH, {
       encoding: "utf8",
       flag: "r",
     });
-    console.log({ CLIENT_KEY_PATH: this.CLIENT_KEY });
 
     this.identityName = identityName ?? "metapprendo";
   }
 
   async buildWallet() {
     this.wallet = await Wallets.newInMemoryWallet();
-    console.log("Built an in memory wallet");
 
     const identity: X509Identity = {
       credentials: {
@@ -65,22 +61,17 @@ export class FabricService {
     };
 
     await this.wallet.put(this.identityName, identity);
-    console.log(`Put into wallet ${this.identityName}`);
   }
 
   async setupGateway() {
     this.gateway = new Gateway();
     const fabricConnectionConfig = FabricConnectionConfig(this.TLS_CERT);
 
-    console.log("connecting...");
-
     await this.gateway.connect(fabricConnectionConfig, {
       wallet: this.wallet,
       identity: this.identityName,
       discovery: { enabled: true, asLocalhost: false }, // using asLocalhost as this gateway is using a fabric network deployed locally
     });
-
-    console.log("Connected to the Blockchain!");
   }
 
   get channel() {
