@@ -53,6 +53,8 @@
     "@loopback/rest-explorer": "5.0.3",
     "@loopback/service-proxy": "5.0.3",
     "basic-auth": "2.0.1",
+    "fabric-ca-client": "^2.2.15",
+    "fabric-network": "^2.2.15",
     "lodash": "4.17.21",
     "tslib": "2.0.0"
   },

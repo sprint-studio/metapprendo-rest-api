@@ -5,7 +5,7 @@ export default class Company extends Entity {
   @property({
     type: "string",
     required: true,
-    description: "Rappresenta la Ragione Sociale dell'azienda"
+    description: "Rappresenta la Ragione Sociale dell'azienda",
   })
   companyName: string;
 
@@ -31,3 +31,9 @@ export default class Company extends Entity {
     super(data);
   }
 }
+
+export interface CompanyRelations {
+  // describe navigational properties here
+}
+
+export type CompanyWithRelations = Company & CompanyRelations;
