@@ -2,7 +2,11 @@ import {
   Client, createRestAppClient,
   givenHttpServerConfig
 } from '@loopback/testlab';
+import chai from 'chai';
 import {BlockchainRestApiApplication} from '..';
+chai.should();
+
+process.env.FILE_ROOT_PATH = "/tmp"
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({

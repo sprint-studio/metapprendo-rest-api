@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { when, then, binding } from "cucumber-tsflow";
+import { when, then, binding } from "@lynxwall/cucumber-tsflow";
 import { expect } from "chai";
-import TestSetup from "./test-setup";
+import { TestSetup } from "./test-setup";
 import EndpointsManager from "../../../services/endpointsManager.service";
-import { ERRORS, EDUCATIONAL_PATH } from "./mock-data";
+import { ERRORS, EDUCATIONAL_PATH } from "../mock-data";
 import { EducationalPath } from "../../../models";
 
 @binding()
 export class EducationalPathTestScenario extends TestSetup {
   @when(
-    /The MetApprendo admin send a request to create a company educational path/
+    "The MetApprendo admin sends a request to create a company educational path"
   )
   public async createEducationalPath() {
     const res = await this.client
@@ -19,7 +19,7 @@ export class EducationalPathTestScenario extends TestSetup {
     this.response = res;
   }
 
-  @then(/The system send a successful confirmation/)
+  @then("The system send a successful confirmation")
   public async createCompanyEducationalPathSuccess() {
     expect(this.response.statusCode).to.be.equal(200);
     expect(this.response.body.payload.idPath).to.be.equal(
@@ -38,7 +38,7 @@ export class EducationalPathTestScenario extends TestSetup {
   }
 
   @when(
-    /The MetApprendo admin send a request to create a company educational path without a body/
+    "The MetApprendo admin sends a request to create a company educational path without a body"
   )
   public async createCompanyEducationalPathWithoutBody() {
     const res = await this.client.post(
@@ -48,7 +48,7 @@ export class EducationalPathTestScenario extends TestSetup {
     this.error = res;
   }
 
-  @then(/The system return an error telling that body is mandatory/)
+  @then("The system return an error telling that body is mandatory")
   public async createCompanyEducationalPathWithoutBodyError() {
     expect(this.error.body.error.statusCode).to.be.equal(
       ERRORS.missingBody.statusCode
@@ -57,7 +57,7 @@ export class EducationalPathTestScenario extends TestSetup {
   }
 
   @when(
-    /The MetApprendo admin send a request to create a company educational path without {string}/
+    "The MetApprendo admin sends a request to create a company educational path without {string}"
   )
   public async tryToCreateCompanyEducationalpath(property: string) {
     const companyEducationalpath: Partial<EducationalPath> = {
@@ -73,7 +73,7 @@ export class EducationalPathTestScenario extends TestSetup {
     this.response = res;
   }
 
-  @then(/The system return an error about the missing property {string}/)
+  @then("The system return an error about the missing property {string}")
   public async missingProperty(property: string) {
     expect(this.response.statusCode).to.be.equal(
       ERRORS.missingBodyParameter.statusCode

@@ -1,28 +1,28 @@
-import { BootMixin } from "@loopback/boot";
-import { ApplicationConfig as DefaultConfig } from "@loopback/core";
-import { RepositoryMixin } from "@loopback/repository";
-import { OASEnhancerBindings, RestApplication } from "@loopback/rest";
+import {BootMixin} from "@loopback/boot";
+import {ApplicationConfig as DefaultConfig} from "@loopback/core";
+import {RepositoryMixin} from "@loopback/repository";
+import {OASEnhancerBindings, RestApplication} from "@loopback/rest";
 import {
   RestExplorerBindings,
-  RestExplorerComponent,
+  RestExplorerComponent
 } from "@loopback/rest-explorer";
-import { ServiceMixin } from "@loopback/service-proxy";
+import {ServiceMixin} from "@loopback/service-proxy";
 import path from "path";
 import authMiddleware from "./middleware/authentication.middleware";
+
 
 type ApplicationConfig = DefaultConfig & {
   basicAuthUsername?: string;
   basicAuthPassword?: string;
   basicAuthDisabled?: boolean;
 };
-export { ApplicationConfig };
+export {ApplicationConfig};
 
 export class BlockchainRestApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication))
 ) {
   constructor(options: ApplicationConfig) {
     super(options);
-
     const {
       basicAuthUsername = process.env.BASIC_AUTH_USERNAME ?? "",
       basicAuthPassword = process.env.BASIC_AUTH_PASSWORD ?? "",
@@ -51,7 +51,7 @@ export class BlockchainRestApiApplication extends BootMixin(
         dirs: ["controllers"],
         extensions: [".controller.js"],
         nested: true,
-      },
+      }
     };
   }
 

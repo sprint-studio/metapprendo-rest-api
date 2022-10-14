@@ -9,11 +9,16 @@ import {
   requestBody,
   RestBindings,
 } from "@loopback/rest";
+import { Contract } from "fabric-network";
 import { AdminUser, BlockchainTransaction, User } from "../models";
 import Company from "../models/company";
 
 export class CompaniesController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
+  constructor(
+    @inject(RestBindings.Http.REQUEST) private req: Request,
+    @inject("microcredentialsChaincode")
+    private microcredentialsChaincode: Contract
+  ) {}
 
   @get("/companies/{companyId}", {
     description: "Ritorna l'azienda passata come parametro",
@@ -30,10 +35,12 @@ export class CompaniesController {
       },
     },
   })
-  getCompany(
+  async getCompany(
     @param.path.string("companyId") companyId: string,
     @param.query.string("transactionId") transactionId: string
-  ): BlockchainTransaction<Company> {
+  ): Promise<BlockchainTransaction<Company>> {
+    await this.microcredentialsChaincode.evaluateTransaction("", ""); // TODO: Da capire come si comporta loopback con una promise in return
+
     return new BlockchainTransaction({
       transactionId: "33242rdfwfwer234rr2342",
       timestamp: new Date("2022-08-17"),

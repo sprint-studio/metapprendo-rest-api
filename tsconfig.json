@@ -5,12 +5,15 @@
     "outDir": "dist",
     "rootDir": "src",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowJs": true,
     "checkJs": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false
   },
   "include": [
     "src"
   ],
-  ex
+  "exclude": [
+    "src/**/*.js"
+  ]
 }
