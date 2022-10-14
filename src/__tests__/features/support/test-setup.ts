@@ -17,7 +17,7 @@ export class TestSetup {
   protected user: Partial<User>;
   protected requestBody: any;
 
-  @beforeAll()
+  @beforeAll('@filesystem')
   public async beforeAllScenarios() {
     await fs.mkdir(`${process.env.FILE_ROOT_PATH}/user1/activity1/certifications`, { recursive: true });
     await fs.writeFile(`${process.env.FILE_ROOT_PATH}/user1/activity1/certifications/a.svg12345678`, Buffer.from("Y29udGVudGFzdmc=", "base64"))

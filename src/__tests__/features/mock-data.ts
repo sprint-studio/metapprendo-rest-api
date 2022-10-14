@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { CompanyEducationalAgenda } from "../../../models";
-
 import { ActivityFile, ActivityFileNoShasum, DossierActivity, DossierActivityUpdate, DossierDocument, DossierDocumentUpdate, EducationalPath, User, UserDossier, UserDossierUpdate } from "../../models";
-
-// export const COMPANY_EDUCATIONAL_AGENDA: CompanyEducationalAgenda = {};
 
 export const USER: Partial<User> = {
   userId: "test-user",
