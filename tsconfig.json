@@ -6,9 +6,11 @@
     "rootDir": "src",
     "experimentalDecorators": true,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "noImplicitAny": false,
   },
   "include": [
     "src"
-  ]
+  ],
+  ex
 }

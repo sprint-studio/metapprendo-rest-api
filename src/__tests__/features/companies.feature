@@ -30,11 +30,11 @@ Feature: Companies
         Then The System respond with a error with statusCode "422" and a message telling that "CUA" is mandatory
 
     Scenario: Create a new Company  without passing PIVA
-        When The MetApprendo admin send a request to create a company named "Acme" without passing "PIVA"
+        When The MetApprendo admin send a request without "PIVA"
         Then The System respond with statusCode "200" returning the created company named "Acme"
     
     Scenario: Create a new Company  without passing CF
-        When The MetApprendo admin send a request to create a company named "Acme" without passing "CF"
+        When The MetApprendo admin send a request without "CF"
         Then The System respond with statusCode "200" returning the created company named "Acme"
 
     
