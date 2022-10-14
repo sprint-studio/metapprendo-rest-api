@@ -34,7 +34,7 @@ Feature: Users
 
   @filesystem
   Scenario: Update user dossier with files that already exist
-    When The MetApprendo admin sends a request to update dossier for "user1" specifying file names that already exist
+    When The MetApprendo admin sends a request to update dossier for "user1" specifying file names that already exists
     Then The system send a successful transaction response with the same body provided
     And The dossier gets saved in the blockchain
     And The new files of the dossier for user "user1" get saved in the local filesystem
